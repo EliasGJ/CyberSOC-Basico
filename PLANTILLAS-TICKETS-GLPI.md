@@ -1,10 +1,8 @@
 # Plantillas de Tickets GLPI - 11 Escenarios
 
-**Instrucciones**: Copiar y pegar en GLPI → Asistencia → Crear ticket
+Instrucciones: Copiar y pegar en GLPI → Asistencia → Crear ticket
 
----
-
-## 1️⃣ SSH BRUTE FORCE (MEDIUM)
+## 1. SSH BRUTE FORCE (MEDIUM)
 
 ```
 Título: MEDIUM: SSH Brute Force desde 192.168.1.50 - 04/02/2026
@@ -31,11 +29,9 @@ TAXONOMÍA: VERIS - Hacking/Brute force
 SLA: 4h respuesta / 3 días resolución
 ```
 
-**Configuración**: Tipo=Incident, Urgencia=Medium, Prioridad=3-Medium
+Configuración: Tipo=Incident, Urgencia=Medium, Prioridad=3-Medium
 
----
-
-## 2️⃣ SQL INJECTION (HIGH)
+## 2. SQL INJECTION (HIGH)
 
 ```
 Título: HIGH: SQL Injection en aplicación web - 04/02/2026
@@ -64,11 +60,9 @@ SLA: 1h respuesta / 24h resolución
 ESCALAR: DBA + CISO
 ```
 
-**Configuración**: Tipo=Incident, Urgencia=High, Prioridad=4-High
+Configuración: Tipo=Incident, Urgencia=High, Prioridad=4-High
 
----
-
-## 3️⃣ XSS ATTACK (HIGH)
+## 3. XSS ATTACK (HIGH)
 
 ```
 Título: HIGH: XSS Attack detectado en formulario web - 04/02/2026

@@ -1,12 +1,10 @@
 # Playbook de Operaciones - CyberSOC
 
-**Manual de Procedimientos para Analistas SOC**  
-**Versión**: 1.0  
-**Fecha**: 04/02/2026
+Manual de Procedimientos para Analistas SOC
+Versión: 1.0
+Fecha: 04/02/2026
 
----
-
-## 📋 Tabla de Contenidos
+## Tabla de Contenidos
 
 1. [Respuesta ante SSH Brute Force](#1-ssh-brute-force)
 2. [Respuesta ante SQL Injection](#2-sql-injection)
@@ -21,20 +19,18 @@
 
 ## 1. SSH Brute Force
 
-**Severidad**: MEDIUM  
-**Tag**: `ssh_failed_login`  
-**Tipo**: Ataque de Autenticación
+Severidad: MEDIUM
+Tag: ssh_failed_login
+Tipo: Ataque de Autenticación
 
 ### Procedimiento de Respuesta
 
-#### Paso 1: Detección (0-5 minutos)
-```
-✓ Alerta aparece en Kibana Dashboard
-✓ Buscar: tags:"ssh_failed_login"
-✓ Revisar eventos similares en última hora
-```
+Paso 1: Detección (0-5 minutos)
+Alerta aparece en Kibana Dashboard
+Buscar: tags:"ssh_failed_login"
+Revisar eventos similares en última hora
 
-#### Paso 2: Análisis (5-15 minutos)
+Paso 2: Análisis (5-15 minutos)
 1. **Identificar IP de origen**:
    - Revisar campo `message` en Kibana
    - Extraer IP atacante

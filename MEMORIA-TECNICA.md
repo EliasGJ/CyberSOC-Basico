@@ -1,20 +1,14 @@
 # CyberSOC Básico - Proyecto Completo
-## Centro de Operaciones de Seguridad (SOC) con ELK Stack + GLPI
+Centro de Operaciones de Seguridad (SOC) con ELK Stack + GLPI
 
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![Security](https://img.shields.io/badge/Security-CyberSOC-red?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-100%25%20Operativo-brightgreen?style=for-the-badge)
+Estado del Proyecto: 100% COMPLETO Y FUNCIONAL
+Última actualización: 04/02/2026
 
-**Estado del Proyecto**: ✅ **100% COMPLETO Y FUNCIONAL**  
-**Última actualización**: 04/02/2026
+## Descripción del Proyecto
 
----
+Sistema CyberSOC completo que implementa el ciclo de vida completo de eventos de seguridad, desde la detección hasta la gestión de incidentes.
 
-## 📋 Descripción del Proyecto
-
-Sistema **CyberSOC completo** que implementa el ciclo de vida completo de eventos de seguridad, desde la detección hasta la gestión de incidentes.
-
-### ✅ Componentes Implementados
+### Componentes Implementados
 
 | Requisito | Componente | Estado | Puerto | Descripción |
 |-----------|-----------|--------|--------|-------------|
@@ -24,7 +18,7 @@ Sistema **CyberSOC completo** que implementa el ciclo de vida completo de evento
 | **Generación Tráfico** | simulate_attacks.ps1 | ✅ OPERATIVO | - | 11 escenarios de ataque |
 | **Visualización** | Dashboard Kibana | ✅ OPERATIVO | 5601 | 3 visualizaciones configuradas |
 
-### 🔍 Reglas de Detección Activas (Logstash)
+### Reglas de Detección Activas (Logstash)
 
 8 reglas de seguridad configuradas:
 1. **SSH Brute Force** (severity: medium)
@@ -36,7 +30,7 @@ Sistema **CyberSOC completo** que implementa el ciclo de vida completo de evento
 7. **Suspicious Processes** (severity: high)
 8. **Data Exfiltration** (severity: high)
 
-### 📊 Política de Retención de Logs
+### Política de Retención de Logs
 
 | Severidad | Periodo Retención | Motivo | Storage |
 |-----------|-------------------|--------|---------|
@@ -45,20 +39,20 @@ Sistema **CyberSOC completo** que implementa el ciclo de vida completo de evento
 | **MEDIUM** | 30 días | Análisis tendencias | Elasticsearch Warm |
 | **Otros** | 7 días | Troubleshooting básico | Elasticsearch Cold |
 
-**Configuración Elasticsearch ILM (Index Lifecycle Management)**:
+Configuración Elasticsearch ILM (Index Lifecycle Management):
 - **Hot Phase**: 0-7 días → Nodos rápidos SSD
 - **Warm Phase**: 7-30 días → Nodos estándar
 - **Cold Phase**: 30-90 días → Nodos económicos
 - **Delete Phase**: >90 días → Eliminación automática
 
-**Cumplimiento Normativo**:
+Cumplimiento Normativo:
 - GDPR: Retención máxima justificada por seguridad
 - Directiva NIS2: Logs de seguridad mínimo 90 días
 - ISO 27001: Evidencia de controles de seguridad
 
-### 📋 Taxonomía de Incidentes (VERIS/ENISA)
+### Taxonomía de Incidentes (VERIS/ENISA)
 
-**Framework VERIS** utilizado para clasificación:
+Framework VERIS utilizado para clasificación:
 
 | Categoría | Subcategoría | Tags en Kibana | Severidad Típica |
 |-----------|--------------|----------------|------------------|
@@ -74,12 +68,12 @@ Sistema **CyberSOC completo** que implementa el ciclo de vida completo de evento
 | **DoS** | Network Flood | `port_scan` | HIGH |
 | **Error** | Misconfiguration | N/A | MEDIUM |
 
-**Categorización ENISA**:
+Categorización ENISA:
 - **Availability**: DoS, Port Scanning
 - **Confidentiality**: Data Exfiltration, SQL Injection
 - **Integrity**: Destructive Commands, Privilege Escalation
 
-### ⏱️ SLA (Service Level Agreement) por Severidad
+### SLA (Service Level Agreement) por Severidad
 
 | Severidad | Tiempo Detección | Tiempo Respuesta | Tiempo Resolución | Escalado Obligatorio |
 |-----------|------------------|------------------|-------------------|---------------------|
@@ -88,12 +82,12 @@ Sistema **CyberSOC completo** que implementa el ciclo de vida completo de evento
 | **MEDIUM** | <15 minutos | 4 horas | 3 días | No requerido |
 | **LOW** | <1 hora | 24 horas | 7 días | No requerido |
 
-**Penalizaciones por incumplimiento SLA**:
+Penalizaciones por incumplimiento SLA:
 - CRITICAL: Revisión inmediata del incidente + informe ejecutivo
 - HIGH: Análisis de causa raíz
 - MEDIUM/LOW: Seguimiento en próxima reunión SOC
 
-**Métricas de Rendimiento (KPI)**:
+Métricas de Rendimiento (KPI):
 - MTTD (Mean Time To Detect): < 5 minutos
 - MTTR (Mean Time To Respond): Según tabla SLA
 - Tasa de falsos positivos: < 10%
