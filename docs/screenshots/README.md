@@ -1,14 +1,12 @@
-# Capturas de Pantalla del Proyecto
+﻿# Capturas de Pantalla del Proyecto
 
 **Propósito**: Esta carpeta contiene las evidencias visuales del funcionamiento del CyberSOC.
 
 ---
 
-## 📸 Capturas Requeridas para Documentación
+## Capturas Requeridas para Documentación
 
-### 1. Infraestructura Docker ✅
-
-**Archivo**: `01-docker-compose-up.png`  
+### 1. Infraestructura Docker **Archivo**: `01-docker-compose-up.png`  
 **Comando**: `docker-compose ps`  
 **Capturar**:
 - Todos los contenedores en estado "Up"
@@ -20,11 +18,7 @@
 docker-compose ps
 ```
 
----
-
-### 2. Kibana - Discover (Eventos de Seguridad) ✅
-
-**Archivo**: `02-kibana-discover-events.png`  
+`n`n### 2. Kibana - Discover (Eventos de Seguridad) **Archivo**: `02-kibana-discover-events.png`  
 **URL**: http://localhost:5601  
 **Capturar**:
 - Pantalla Discover con Data View "Syslog Security Events"
@@ -37,11 +31,7 @@ docker-compose ps
 - Lista de eventos con diferentes severidades (colores)
 - Panel lateral con campos disponibles
 
----
-
-### 3. Kibana - Dashboard Completo ✅
-
-**Archivo**: `03-kibana-dashboard.png`  
+`n`n### 3. Kibana - Dashboard Completo **Archivo**: `03-kibana-dashboard.png`  
 **URL**: http://localhost:5601 → Analytics → Dashboard  
 **Capturar**:
 - Dashboard "CyberSOC - Security Dashboard"
@@ -55,11 +45,7 @@ docker-compose ps
 - Selector de tiempo visible (Last 7 days)
 - Botón Refresh visible
 
----
-
-### 4. Kibana - Evento Critical en Detalle ✅
-
-**Archivo**: `04-kibana-event-detail.png`  
+`n`n### 4. Kibana - Evento Critical en Detalle **Archivo**: `04-kibana-event-detail.png`  
 **Capturar**:
 - Un evento con `severity:"critical"` expandido
 - Todos los campos visibles:
@@ -71,11 +57,7 @@ docker-compose ps
   - host.name
   - log.file.path
 
----
-
-### 5. GLPI - Panel Principal ✅
-
-**Archivo**: `05-glpi-home.png`  
+`n`n### 5. GLPI - Panel Principal **Archivo**: `05-glpi-home.png`  
 **URL**: http://localhost:9000  
 **Capturar**:
 - Dashboard principal después de login
@@ -83,11 +65,7 @@ docker-compose ps
 - Sección "Assistance" → "Tickets"
 - Usuario logueado: glpi
 
----
-
-### 6. GLPI - Ticket de Seguridad Creado ✅
-
-**Archivo**: `06-glpi-ticket-critical.png`  
+`n`n### 6. GLPI - Ticket de Seguridad Creado **Archivo**: `06-glpi-ticket-critical.png`  
 **Capturar**:
 - Ticket creado con:
   - **Título**: "CRÍTICO: Comando destructivo detectado..."
@@ -102,11 +80,7 @@ docker-compose ps
 - Acciones tomadas
 - Campos completos
 
----
-
-### 7. Logstash - Logs de Procesamiento ✅
-
-**Archivo**: `07-logstash-logs.png`  
+`n`n### 7. Logstash - Logs de Procesamiento **Archivo**: `07-logstash-logs.png`  
 **Comando**: `docker logs logstash-siem --tail 50`  
 **Capturar**:
 - Logs mostrando eventos procesados
@@ -120,11 +94,7 @@ docker-compose ps
   }
   ```
 
----
-
-### 8. Elasticsearch - Índices y Conteo ✅
-
-**Archivo**: `08-elasticsearch-indices.png`  
+`n`n### 8. Elasticsearch - Índices y Conteo **Archivo**: `08-elasticsearch-indices.png`  
 **PowerShell**:
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:9200/_cat/indices?v"
@@ -134,11 +104,7 @@ Invoke-RestMethod -Uri "http://localhost:9200/_cat/indices?v"
 - Columna `docs.count` con 40+ documentos
 - Estado `green` o `yellow`
 
----
-
-### 9. Flujo Completo: Ataque → Detección → Ticket ✅
-
-**Archivo**: `09-flujo-completo.png`  
+`n`n### 9. Flujo Completo: Ataque → Detección → Ticket **Archivo**: `09-flujo-completo.png`  
 **Capturar**: Composición de 3 pantallas:
 1. Terminal con comando de ataque ejecutándose
 2. Kibana mostrando el evento detectado (5 segundos después)
@@ -146,22 +112,14 @@ Invoke-RestMethod -Uri "http://localhost:9200/_cat/indices?v"
 
 **Herramienta sugerida**: Paint / PowerPoint para juntar las 3 capturas
 
----
-
-### 10. Script de Simulación de Ataques ✅
-
-**Archivo**: `10-simulate-attacks-menu.png`  
+`n`n### 10. Script de Simulación de Ataques **Archivo**: `10-simulate-attacks-menu.png`  
 **Comando**: `.\simulate_attacks.ps1`  
 **Capturar**:
 - Menú interactivo con 11 opciones
 - Selección de "11 - Todos los ataques"
 - Salida mostrando eventos generados
 
----
-
-### 11. Docker Network - Arquitectura ✅
-
-**Archivo**: `11-docker-network.png`  
+`n`n### 11. Docker Network - Arquitectura **Archivo**: `11-docker-network.png`  
 **Comando**:
 ```powershell
 docker network inspect socnet
@@ -171,11 +129,7 @@ docker network inspect socnet
 - IPs asignadas a cada servicio
 - Configuración de la red (driver: bridge)
 
----
-
-### 12. Syslog Server - Archivos de Log ✅
-
-**Archivo**: `12-syslog-logs.png`  
+`n`n### 12. Syslog Server - Archivos de Log **Archivo**: `12-syslog-logs.png`  
 **Comando**:
 ```powershell
 docker exec syslog-server ls -lh /var/log/syslog-ng/syslog-client/
@@ -185,11 +139,7 @@ docker exec syslog-server ls -lh /var/log/syslog-ng/syslog-client/
 - Tamaños de archivo (mostrando actividad)
 - Timestamps recientes
 
----
-
-### 13. Reglas de Detección de Logstash ✅
-
-**Archivo**: `13-logstash-rules.png`  
+`n`n### 13. Reglas de Detección de Logstash **Archivo**: `13-logstash-rules.png`  
 **Abrir**: `logstash/pipeline/logstash.conf` en editor  
 **Capturar**:
 - Código de una regla completa, por ejemplo:
@@ -225,7 +175,7 @@ if [message] =~ /rm -rf|mkfs|dd if=/ {
 
 ---
 
-## 🎯 Checklist de Capturas
+## Checklist de Capturas
 
 Antes de considerar la documentación completa, verifica:
 
@@ -239,7 +189,7 @@ Antes de considerar la documentación completa, verifica:
 
 ---
 
-## 📝 Notas para la Memoria Técnica
+## Notas para la Memoria Técnica
 
 Al insertar estas capturas en la memoria, incluir:
 
@@ -278,4 +228,4 @@ $bitmap.Save("C:\Users\rupra\Desktop\CyberSOC.Basico\docs\screenshots\01-screens
 
 ---
 
-**¡Una vez completes todas las capturas, tu proyecto tendrá evidencia visual profesional!** 📸✨
+**¡Una vez completes todas las capturas, tu proyecto tendrá evidencia visual profesional!** ✨

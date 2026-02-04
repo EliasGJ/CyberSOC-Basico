@@ -94,7 +94,7 @@ Abrir el archivo PLANTILLAS-TICKETS-GLPI.md y copiar el ticket #4 (Comando Destr
 Título: CRÍTICO: Comando rm -rf detectado - 04/02/2026
 
 Descripción:
-⚠️ INCIDENTE CRÍTICO - COMANDO DESTRUCTIVO
+INCIDENTE CRÍTICO - COMANDO DESTRUCTIVO
 Timestamp: 04/02/2026 [HORA]
 Host afectado: syslog-client
 Usuario: root

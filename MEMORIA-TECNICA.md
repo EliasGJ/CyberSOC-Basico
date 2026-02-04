@@ -1,4 +1,4 @@
-# CyberSOC Básico - Proyecto Completo
+﻿# CyberSOC Básico - Proyecto Completo
 Centro de Operaciones de Seguridad (SOC) con ELK Stack + GLPI
 
 Estado del Proyecto: 100% COMPLETO Y FUNCIONAL
@@ -12,11 +12,11 @@ Sistema CyberSOC completo que implementa el ciclo de vida completo de eventos de
 
 | Requisito | Componente | Estado | Puerto | Descripción |
 |-----------|-----------|--------|--------|-------------|
-| **SIEM/Dashboards** | ELK Stack | ✅ OPERATIVO | 5601, 9200 | Elasticsearch + Logstash + Kibana |
-| **Recolección** | syslog-ng + Filebeat | ✅ OPERATIVO | 514, 5044 | Captura de logs en tiempo real |
-| **Gestión Incidentes** | GLPI + MySQL | ✅ OPERATIVO | 9000 | Sistema de ticketing |
-| **Generación Tráfico** | simulate_attacks.ps1 | ✅ OPERATIVO | - | 11 escenarios de ataque |
-| **Visualización** | Dashboard Kibana | ✅ OPERATIVO | 5601 | 3 visualizaciones configuradas |
+| **SIEM/Dashboards** | ELK Stack | OPERATIVO | 5601, 9200 | Elasticsearch + Logstash + Kibana |
+| **Recolección** | syslog-ng + Filebeat | OPERATIVO | 514, 5044 | Captura de logs en tiempo real |
+| **Gestión Incidentes** | GLPI + MySQL | OPERATIVO | 9000 | Sistema de ticketing |
+| **Generación Tráfico** | simulate_attacks.ps1 | OPERATIVO | - | 11 escenarios de ataque |
+| **Visualización** | Dashboard Kibana | OPERATIVO | 5601 | 3 visualizaciones configuradas |
 
 ### Reglas de Detección Activas (Logstash)
 
@@ -93,9 +93,7 @@ Métricas de Rendimiento (KPI):
 - Tasa de falsos positivos: < 10%
 - Cobertura de detección: > 95% de ataques conocidos
 
----
-
-## 🚀 Inicio Rápido (5 minutos)
+`n`n## Inicio Rápido (5 minutos)
 
 ### 1. Iniciar el Sistema
 ```powershell
@@ -109,14 +107,14 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
 **Kibana (SIEM Dashboard)** - INTERFAZ PRINCIPAL
 - 🌐 URL: **http://localhost:5601**
 - 🔓 Sin credenciales
-- 📊 Menú → Analytics → Discover
+- Menú → Analytics → Discover
 
 **GLPI (Gestión de Tickets)**
 - 🎫 URL: **http://localhost:9000**
 - 🔑 Usuario: `glpi` / Contraseña: `glpi`
-- 📝 Ver [guía completa de instalación](glpi/GUIA-GLPI.md)
+- Ver [guía completa de instalación](glpi/GUIA-GLPI.md)
 
-⚠️ **IMPORTANTE**: NO acceder a `http://localhost:9200` (Elasticsearch no tiene interfaz web)
+**IMPORTANTE**: NO acceder a `http://localhost:9200` (Elasticsearch no tiene interfaz web)
 
 ### 3. Configurar Kibana (Primera Vez)
 
@@ -161,9 +159,7 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
    - **Prioridad**: Según severidad (6-Major para critical)
    - **Categoría**: Incident
 
----
-
-## 🏗️ Arquitectura del Stack
+`n`n## Arquitectura del Stack
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -208,9 +204,7 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
 └─────────────────────────────────────────────────────────────────┘
 ```
 
----
-
-## 🚀 Componentes del Stack
+`n`n## Componentes del Stack
 
 ### 1. **Recolección de Logs (Agents)**
 - **syslog-ng**: Cliente y servidor para agregación de logs (Puerto 514/TCP)
@@ -218,27 +212,25 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
 
 ### 2. **SIEM (ELK Stack)**
 - **Elasticsearch 8.11.0**: Motor de búsqueda y almacenamiento (Puerto 9200)
-  - ⚠️ **IMPORTANTE**: Elasticsearch es la API/backend (puerto 9200) - NO accedas directamente
+  - **IMPORTANTE**: Elasticsearch es la API/backend (puerto 9200) - NO accedas directamente
 - **Logstash 8.11.0**: Procesamiento con 8 reglas de detección (Puerto 5000)
 - **Kibana 8.11.0**: **INTERFAZ VISUAL** - Dashboard web para análisis (Puerto 5601)
-  - ✅ **ACCEDE AQUÍ**: http://localhost:5601 - Esta es la interfaz gráfica donde verás todo
+  - **ACCEDE AQUÍ**: http://localhost:5601 - Esta es la interfaz gráfica donde verás todo
 
 ### 3. **Gestión de Incidentes (Ticketing)**
 - **GLPI**: Sistema de ticketing y gestión de incidentes (Puerto 9000)
-  - ✅ **ACCEDE AQUÍ**: http://localhost:9000 - Login: glpi / glpi
+  - **ACCEDE AQUÍ**: http://localhost:9000 - Login: glpi / glpi
   - Crea, asigna y hace seguimiento de tickets de seguridad
 - **MySQL 8.0**: Base de datos para GLPI
 
 ### 4. **Generación de Tráfico**
 - **simulate_attacks.ps1**: Script con 11 tipos de ataques simulados
 
----
-
-## ℹ️ ¿Qué es cada componente?
+`n`n## ¿Qué es cada componente?
 
 ### Kibana vs Elasticsearch - ¿Cuál uso?
 
-**🎯 Kibana (http://localhost:5601)** - **USA ESTE**
+**Kibana (http://localhost:5601)** - **USA ESTE**
 - Es la **interfaz visual** (dashboard web)
 - Aquí ves gráficos, tablas, eventos de seguridad
 - Es como el "Windows Explorer" del sistema
@@ -250,14 +242,12 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
 - Kibana usa Elasticsearch internamente
 - Piensa en él como el "disco duro" del sistema
 
-**📊 Logstash** - Procesa logs automáticamente
+**Logstash** - Procesa logs automáticamente
 - Recibe logs → Aplica reglas de detección → Envía a Elasticsearch
 - NO tiene interfaz web
 - Aplica 8 reglas de seguridad en tiempo real
 
----
-
-## � Inicio Rápido
+`n`n## � Inicio Rápido
 
 ### Opción 1: Usar el script automatizado (Recomendado)
 
@@ -267,10 +257,10 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
 ```
 
 Este script:
-- ✅ Verifica que Docker esté corriendo
-- ✅ Inicia todos los servicios
-- ✅ Espera a que estén listos
-- ✅ Muestra las URLs de acceso
+- Verifica que Docker esté corriendo
+- Inicia todos los servicios
+- Espera a que estén listos
+- Muestra las URLs de acceso
 
 ### Opción 2: Manual
 
@@ -278,9 +268,7 @@ Este script:
 docker-compose up -d
 ```
 
----
-
-## �📦 Requisitos Previos
+`n`n## �📦 Requisitos Previos
 
 - **Docker**: versión 20.10 o superior
 - **Docker Compose**: versión 2.0 o superior
@@ -288,9 +276,7 @@ docker-compose up -d
 - **Disco**: Mínimo 20GB libres
 - **Sistema Operativo**: Windows 10/11, Linux, macOS
 
----
-
-## ⚙️ Instalación y Despliegue
+`n`n## Instalación y Despliegue
 
 ### 1. Clonar o descargar el repositorio
 
@@ -315,7 +301,7 @@ docker-compose up -d
 
 Este comando descargará todas las imágenes necesarias y levantará los contenedores en modo background.
 
-⏱️ **Tiempo de inicio**: 
+**Tiempo de inicio**: 
 - **ELK Stack**: ~1-2 minutos
 - **Cassandra + TheHive**: ~2-3 minutos adicionales
 
@@ -348,9 +334,7 @@ docker-compose logs -f wazuh-manager
 docker-compose logs -f thehive
 ```
 
----
-
-## 🌐 Acceso a las Interfaces Web
+`n`n## 🌐 Acceso a las Interfaces Web
 
 Una vez levantado el entorno, accede a:
 
@@ -359,12 +343,12 @@ Una vez levantado el entorno, accede a:
 | **Kibana (SIEM)** ⭐ | http://localhost:5601 | - | - | **Dashboard principal** - Accede aquí para ver eventos |
 | **Elasticsearch API** | http://localhost:9200 | - | - | API backend (no accedas, usa Kibana) |
 
-> **⚠️ IMPORTANTE**: 
+> **IMPORTANTE**: 
 > - **Para ver eventos**: Usa **Kibana** (puerto 5601)
 > - No accedas directamente a Elasticsearch (puerto 9200) - no tiene interfaz visual
 > - Todos los eventos detectados aparecen en Kibana Discover automáticamente
 
-> **⚠️ Nota**: Kibana puede tardar 1-2 minutos en estar completamente disponible tras el inicio. No requiere usuario ni contraseña.
+> **Nota**: Kibana puede tardar 1-2 minutos en estar completamente disponible tras el inicio. No requiere usuario ni contraseña.
 
 ### 5. **Simulación de Ataques**
 
@@ -386,8 +370,8 @@ El script muestra un menú interactivo con 11 tipos de ataques:
 3. 🎭 Cross-Site Scripting (XSS)
 4. 📂 Path Traversal
 5. 💣 Comandos Destructivos
-6. ⬆️ Escalada de Privilegios
-7. 🔍 Port Scanning
+6. Escalada de Privilegios
+7. Port Scanning
 8. 👻 Procesos Sospechosos
 9. 📤 Exfiltración de Datos
 10. 📦 Instalación No Autorizada
@@ -395,9 +379,7 @@ El script muestra un menú interactivo con 11 tipos de ataques:
 
 Los eventos aparecen en **Kibana** en 5-10 segundos.
 
----
-
-## 📊 Flujo de Trabajo Completo
+`n`n## Flujo de Trabajo Completo
 
 ### Flujo: Ataque → Detección → Visualización → Gestión
 
@@ -445,9 +427,7 @@ Los eventos aparecen en **Kibana** en 5-10 segundos.
 - **Prioridad**: 5 - High
 - **Categoría**: Incident
 
----
-
-## 📈 Dashboard de Kibana
+`n`n## 📈 Dashboard de Kibana
 
 El dashboard "CyberSOC - Security Dashboard" incluye:
 
@@ -469,9 +449,7 @@ El dashboard "CyberSOC - Security Dashboard" incluye:
 - Recomendado: 30 seconds o 1 minute
 - Los eventos aparecen automáticamente
 
----
-
-## 🔧 Comandos Útiles
+`n`n## 🔧 Comandos Útiles
 
 ### Gestión de Contenedores
 
@@ -531,9 +509,7 @@ docker exec syslog-client logger -t sudo "ROOT command: rm -rf /var/log/*"
 docker exec syslog-client logger -t kernel "Suspicious process: /tmp/.hidden/cryptominer"
 ```
 
----
-
-## 🧪 Escenarios de Prueba
+`n`n## 🧪 Escenarios de Prueba
 
 ### Escenario 1: SSH Brute Force Attack
 ```powershell
@@ -571,9 +547,7 @@ docker exec syslog-client logger -t kernel "Suspicious process: /tmp/.hidden/cry
 - Severidades: critical, high, medium
 - Perfecto para demostración completa
 
----
-
-## 🎓 Guías y Documentación
+`n`n## 🎓 Guías y Documentación
 
 ### Documentación Incluida
 
@@ -619,9 +593,7 @@ docker exec syslog-client logger -t su "User changed to root"
 
 **Resultado esperado**: Evento etiquetado con `privilege_escalation` y severidad `high` en Kibana.
 
----
-
-## 📈 Demostración del Ciclo Completo
+`n`n## 📈 Demostración del Ciclo Completo
 
 ### Escenario: Detección y Gestión de Ataque de Fuerza Bruta
 
@@ -663,9 +635,7 @@ docker exec syslog-client logger -t su "User changed to root"
      - [ ] Notificar al equipo de red
    - **Para la demo**: Exporta eventos a CSV desde Kibana (botón "Share" → "CSV Reports")
 
----
-
-## 🛠️ Comandos Útiles
+`n`n## Comandos Útiles
 
 ### Gestión de Contenedores
 
@@ -704,9 +674,7 @@ docker system df
 
 ### Backup de Datos
 
----
-
-## 🔧 Solución de Problemas
+`n`n## 🔧 Solución de Problemas
 
 ### Problema: Kibana muestra "No results"
 
@@ -753,73 +721,69 @@ docker-compose up -d
 3. Completar instalación web en primer acceso
 4. Seguir guía: [glpi/GUIA-GLPI.md](glpi/GUIA-GLPI.md)
 
----
+`n`n## Requisitos del Proyecto Cumplidos
 
-## 📝 Requisitos del Proyecto Cumplidos
-
-### ✅ Requisito 1: SIEM y Dashboards (ELK Stack)
+### Requisito 1: SIEM y Dashboards (ELK Stack)
 - Elasticsearch 8.11.0 para almacenamiento
 - Logstash 8.11.0 con 8 reglas de detección
 - Kibana 8.11.0 con dashboard operativo
 - 3 visualizaciones configuradas
 
-### ✅ Requisito 2: Recolección de Logs (Agents)
+### Requisito 2: Recolección de Logs (Agents)
 - syslog-ng (cliente/servidor)
 - Filebeat 8.11.0
 - Captura en tiempo real
 
-### ✅ Requisito 3: Gestión de Incidentes (Ticketing)
+### Requisito 3: Gestión de Incidentes (Ticketing)
 - GLPI con MySQL 8.0
 - Sistema completo de tickets
 - Taxonomía VERIS/ENISA implementada
 - SLA definidos por severidad
 
-### ✅ Requisito 4: Generación de Tráfico
+### Requisito 4: Generación de Tráfico
 - Script `simulate_attacks.ps1`
 - 11 escenarios de ataque
 - Clasificación por severidad
 
-### ✅ Requisito 5: Playbook de Operación
+### Requisito 5: Playbook de Operación
 - **PLAYBOOK.md** con 8 procedimientos completos
 - Tiempos de respuesta y resolución definidos
 - Comandos técnicos de contención
 - Flujos de escalado documentados
 
-### ✅ Requisito 6: Memoria Técnica
+### Requisito 6: Memoria Técnica
 - Arquitectura de red documentada
 - Política de retención de logs (90/60/30 días)
 - Justificación técnica de herramientas
 - Evidencias visuales en docs/screenshots/
 
-### ✅ Bonus: Visualización Avanzada
+### Bonus: Visualización Avanzada
 - Dashboard interactivo
 - Auto-refresh configurable
 - Filtros por severidad y tipo
 
----
-
-## 🎓 Documentación Completa
+`n`n## 🎓 Documentación Completa
 
 ### 📚 Archivos de Documentación
 
 | Archivo | Propósito | Estado |
 |---------|-----------|--------|
-| **README.md** | Guía completa del proyecto | ✅ COMPLETO |
-| **PLAYBOOK.md** | Manual de procedimientos SOC | ✅ COMPLETO |
-| **glpi/GUIA-GLPI.md** | Instalación y uso de GLPI | ✅ COMPLETO |
-| **docs/screenshots/README.md** | Guía para evidencias visuales | ✅ COMPLETO |
-| **logstash/pipeline/logstash.conf** | Reglas comentadas | ✅ COMPLETO |
-| **docker-compose.yml** | Arquitectura desplegable | ✅ COMPLETO |
+| **README.md** | Guía completa del proyecto | COMPLETO |
+| **PLAYBOOK.md** | Manual de procedimientos SOC | COMPLETO |
+| **glpi/GUIA-GLPI.md** | Instalación y uso de GLPI | COMPLETO |
+| **docs/screenshots/README.md** | Guía para evidencias visuales | COMPLETO |
+| **logstash/pipeline/logstash.conf** | Reglas comentadas | COMPLETO |
+| **docker-compose.yml** | Arquitectura desplegable | COMPLETO |
 
 ### 📖 Playbook de Respuesta a Incidentes
 
 **[PLAYBOOK.md](PLAYBOOK.md)** incluye:
-- ✅ 8 procedimientos de respuesta detallados
-- ✅ SLA: 15 min (CRITICAL) a 3 días (MEDIUM)
-- ✅ Taxonomía VERIS completa
-- ✅ Contactos de escalado
-- ✅ Comandos técnicos de PowerShell/Bash
-- ✅ Flujos de trabajo ilustrados
+- 8 procedimientos de respuesta detallados
+- SLA: 15 min (CRITICAL) a 3 días (MEDIUM)
+- Taxonomía VERIS completa
+- Contactos de escalado
+- Comandos técnicos de PowerShell/Bash
+- Flujos de trabajo ilustrados
 
 ### 📸 Evidencias Visuales
 
@@ -837,15 +801,13 @@ docker-compose up -d
 
 Cumplimiento: GDPR, Directiva NIS2, ISO 27001
 
-### 📊 Taxonomía VERIS/ENISA
+### Taxonomía VERIS/ENISA
 - **Malware**: Cryptominers, Backdoors
 - **Hacking**: SQLi, XSS, Brute Force
 - **Misuse**: Privilege Abuse, Destructive Commands
 - **DoS**: Port Scanning
 
----
-
-## 👥 Créditos
+`n`n## 👥 Créditos
 
 Proyecto desarrollado para demostración de CyberSOC básico utilizando tecnologías open source.
 
@@ -856,15 +818,11 @@ Proyecto desarrollado para demostración de CyberSOC básico utilizando tecnolog
 - Filebeat 8.11.0
 - Docker & Docker Compose
 
----
-
-## 📄 Licencia
+`n`n## 📄 Licencia
 
 Este proyecto es de código abierto con fines educativos.
 
----
-
-## 📞 Soporte
+`n`n## 📞 Soporte
 
 Para consultas sobre el proyecto:
 - Revisar [glpi/GUIA-GLPI.md](glpi/GUIA-GLPI.md) para configuración de GLPI
@@ -875,21 +833,15 @@ Para consultas sobre el proyecto:
 
 **¡Proyecto CyberSOC 100% Completo y Operativo!** 🎉
 
----
-
-## 👥 Equipo y Contribuciones
+`n`n## 👥 Equipo y Contribuciones
 
 Este proyecto ha sido desarrollado como parte de la **UD 4 - Construcción de un CyberSOC**.
 
----
-
-## 📝 Licencia
+`n`n## Licencia
 
 Este proyecto es de código abierto bajo licencia MIT.
 
----
-
-## 🎓 Notas para la Demo
+`n`n## 🎓 Notas para la Demo
 
 ### Puntos Clave a Demostrar:
 
@@ -910,9 +862,7 @@ Este proyecto es de código abierto bajo licencia MIT.
    - Exportar eventos a CSV
    - Explicar: "Sistema completo de detección y clasificación"
 
----
-
-## 🚀 Próximos Pasos (Mejoras Futuras)
+`n`n## Próximos Pasos (Mejoras Futuras)
 
 - [ ] Integración con plataforma SOAR para respuesta automatizada
 - [ ] Conexión con MISP para threat intelligence

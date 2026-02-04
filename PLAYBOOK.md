@@ -94,12 +94,10 @@ PRIORIDAD: Alta
 
 ### Procedimiento de Respuesta
 
-#### Paso 1: Detección (0-5 minutos)
-```
-✓ Alerta HIGH en Kibana
-✓ Buscar: tags:"sql_injection"
-✓ Identificar aplicación web afectada
-```
+Paso 1: Detección (0-5 minutos)
+Alerta HIGH en Kibana
+Buscar: tags:"sql_injection"
+Identificar aplicación web afectada
 
 #### Paso 2: Análisis (5-20 minutos)
 1. **Examinar payload**:
@@ -226,12 +224,10 @@ New-NetFirewallRule -DisplayName "Block XSS Attacker" -RemoteAddress [IP] -Actio
 
 ### Procedimiento de Respuesta
 
-#### Paso 1: Detección INMEDIATA (0-2 minutos)
-```
-⚠️ ALERTA CRÍTICA en Kibana
-✓ Buscar: tags:"destructive_command"
-✓ Comandos: rm -rf, mkfs, dd if=/dev/zero
-```
+Paso 1: Detección INMEDIATA (0-2 minutos)
+ALERTA CRÍTICA en Kibana
+Buscar: tags:"destructive_command"
+Comandos: rm -rf, mkfs, dd if=/dev/zero
 
 #### Paso 2: Respuesta Inmediata (2-5 minutos)
 **ACCIÓN URGENTE**:
@@ -295,7 +291,7 @@ docker run --rm -v [volume]:/data -v C:\backups:/backup ubuntu tar xzf /backup/b
 - **Urgencia**: Very High
 - **Descripción**:
 ```
-⚠️ INCIDENTE CRÍTICO - COMANDO DESTRUCTIVO
+INCIDENTE CRÍTICO - COMANDO DESTRUCTIVO
 
 Timestamp: [FECHA_HORA]
 Host afectado: [HOSTNAME]
@@ -496,9 +492,7 @@ docker exec [container] pkill scp
 
 **SLA**: Respuesta 1h / Resolución 24h
 
----
-
-## 📊 Tabla de SLA por Severidad
+## Tabla de SLA por Severidad
 
 | Severidad | Tiempo Respuesta | Tiempo Resolución | Escalado |
 |-----------|------------------|-------------------|----------|
@@ -506,9 +500,7 @@ docker exec [container] pkill scp
 | **HIGH** | 1 hora | 24 horas | A supervisor SOC |
 | **MEDIUM** | 4 horas | 3 días | No requerido |
 
----
-
-## 📋 Taxonomía de Incidentes (VERIS)
+## Taxonomía de Incidentes (VERIS)
 
 Clasificación según framework VERIS:
 
@@ -521,9 +513,7 @@ Clasificación según framework VERIS:
 | **Environmental** | Power Failure | N/A |
 | **DoS** | Network Scanning | Port scanning |
 
----
-
-## 🔄 Flujo General de Respuesta
+## Flujo General de Respuesta
 
 ```
 1. DETECCIÓN
@@ -559,9 +549,7 @@ Clasificación según framework VERIS:
    └─> Mejorar detección
 ```
 
----
-
-## 📞 Contactos de Escalado
+## Contactos de Escalado
 
 | Rol | Contacto | Cuándo Escalar |
 |-----|----------|----------------|
@@ -571,7 +559,5 @@ Clasificación según framework VERIS:
 | **IT Manager** | it@empresa.com | Necesidad de cambios infraestructura |
 | **CEO** | ceo@empresa.com | Incidente impacto negocio |
 
----
-
-**Última actualización**: 04/02/2026  
-**Próxima revisión**: Cada 3 meses o después de incidente mayor
+Última actualización: 04/02/2026
+Próxima revisión: Cada 3 meses o después de incidente mayor
