@@ -1,0 +1,157 @@
+services:
+  syslog-server:
+    image: balabit/syslog-ng:latest
+    container_name: syslog-server
+    hostname: syslog-server
+    ports:
+      - "514:514/tcp"
+    volumes:
+      - ./logs/server:/var/log/syslog-ng
+      - ./server/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf
+    networks:
+      - socnet
+
+  syslog-client:
+    image: balabit/syslog-ng:latest
+    container_name: syslog-client
+    hostname: syslog-client
+    depends_on:
+      - syslog-server
+    volumes:
+      - ./client/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf
+    networks:
+      - socnet
+
+  # SIEM - Elasticsearch (almacenamiento y búsqueda)
+  elasticsearch:
+    image: elasticsearch:8.11.0
+    container_name: elasticsearch-siem
+    hostname: elasticsearch
+    restart: unless-stopped
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - elasticsearch-siem-data:/usr/share/elasticsearch/data
+    networks:
+      - socnet
+
+  # SIEM Dashboard - Kibana
+  kibana:
+    image: kibana:8.11.0
+    container_name: kibana-siem
+    hostname: kibana
+    restart: unless-stopped
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - SERVER_NAME=kibana-siem
+      - XPACK_SECURITY_ENABLED=false
+    depends_on:
+      - elasticsearch
+    networks:
+      - socnet
+
+  # Logstash para procesamiento de logs
+  logstash:
+    image: logstash:8.11.0
+    container_name: logstash-siem
+    hostname: logstash
+    restart: unless-stopped
+    ports:
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "5044:5044"
+    environment:
+      - "LS_JAVA_OPTS=-Xms256m -Xmx256m"
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./logs/server:/var/log/syslog-ng:ro
+    depends_on:
+      - elasticsearch
+    networks:
+      - socnet
+
+  # Filebeat para recolección avanzada de logs
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.11.0
+    container_name: filebeat-collector
+    hostname: filebeat
+    restart: unless-stopped
+    user: root
+    volumes:
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./logs/server:/var/log/syslog-ng:ro
+      - filebeat-data:/usr/share/filebeat/data
+    command: filebeat -e -strict.perms=false
+    depends_on:
+      - elasticsearch
+      - logstash
+    networks:
+      - socnet
+    healthcheck:
+      test: ["CMD", "filebeat", "test", "config"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # MySQL para GLPI (base de datos ligera)
+  mysql:
+    image: mysql:8.0
+    container_name: glpi-mysql
+    hostname: mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=glpidb
+      - MYSQL_USER=glpi_user
+      - MYSQL_PASSWORD=glpi_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - socnet
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # GLPI - Gestión de Incidentes (alternativa ligera a TheHive)
+  glpi:
+    image: diouxx/glpi:latest
+    container_name: glpi-incidentes
+    hostname: glpi
+    restart: unless-stopped
+    ports:
+      - "9000:80"
+    environment:
+      - TIMEZONE=Europe/Madrid
+    depends_on:
+      - mysql
+    volumes:
+      - glpi-data:/var/www/html/glpi
+    networks:
+      - socnet
+
+volumes:
+  elasticsearch-siem-data:
+  filebeat-data:
+  mysql-data:
+  glpi-data:
+
+networks:
+  socnet:
+    driver: bridge

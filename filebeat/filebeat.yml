@@ -1,0 +1,95 @@
+# ============================== Filebeat Configuration ==============================
+# Configuración de Filebeat para CyberSOC
+# Recolecta logs y los envía a Logstash para procesamiento
+
+# ============================== Filebeat Inputs ==============================
+filebeat.inputs:
+  # Input 1: Logs de syslog-ng
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/syslog-ng/syslog-client/*.log
+    fields:
+      log_type: syslog
+    fields_under_root: true
+    
+  # Input 2: Logs del servidor syslog
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/syslog-ng/*.log
+    exclude_files: ['.gz$']
+    fields:
+      log_type: syslog-server
+    fields_under_root: true
+
+# ============================== Filebeat Modules ==============================
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+# ============================== Processors ==============================
+processors:
+  # Añade metadata del host
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+      
+  # Añade información de Docker si está disponible
+  - add_docker_metadata:
+      host: "unix:///var/run/docker.sock"
+      
+  # Parsear timestamp
+  - timestamp:
+      field: "@timestamp"
+      layouts:
+        - '2006-01-02T15:04:05.000Z'
+        - '2006-01-02T15:04:05Z'
+      test:
+        - '2019-06-22T16:33:51.000Z'
+
+# ============================== Output ==============================
+# Enviamos los logs directamente a Elasticsearch
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+# Alternativa: Enviar a Logstash (comentado)
+#output.logstash:
+#  hosts: ["logstash:5044"]
+#  loadbalance: true
+#  worker: 2
+#  bulk_max_size: 2048
+
+# ============================== Logging ==============================
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat
+  keepfiles: 7
+  permissions: 0644
+
+# ============================== Monitoring ==============================
+# Enviar métricas de Filebeat a Elasticsearch
+monitoring.enabled: false
+#monitoring.elasticsearch:
+#  hosts: ["elasticsearch:9200"]
+
+# ============================== Setup ==============================
+# Configuración de índice y dashboards de Kibana
+setup.ilm.enabled: false
+setup.template.name: "filebeat"
+setup.template.pattern: "filebeat-*"
+setup.template.settings:
+  index.number_of_shards: 1
+  index.number_of_replicas: 0
+
+# Configuración de Kibana para dashboards
+setup.kibana:
+  host: "kibana:5601"
+
+# ============================== HTTP Endpoint ==============================
+# Habilitar endpoint HTTP para monitoreo
+http.enabled: true
+http.port: 5066
+http.host: "0.0.0.0"
