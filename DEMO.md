@@ -242,5 +242,3 @@ Esta demo cubre el 30% de la nota (Demo/Exposición):
 5. Pide feedback a algún compañero
 6. Duerme bien la noche antes
 7. Llega 15 minutos antes para tener todo configurado
-
-Recuerda: el objetivo no es que salga perfecto, sino demostrar que entiendes lo que has hecho, que el sistema funciona, cumple los requisitos y está bien documentado.
