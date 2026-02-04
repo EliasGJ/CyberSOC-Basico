@@ -1,10 +1,8 @@
-# 🎯 GUÍA EXPRESS PARA EL 10 - Demostración en Vivo
+# Guía de presentación - Demostración en vivo
 
-**Duración**: 12-15 minutos | **Objetivo**: Demostrar flujo completo funcionando
+Duración: 12-15 minutos
 
----
-
-## ⚡ PREPARACIÓN (Antes de entrar a clase)
+## Preparación (antes de entrar a clase)
 
 ```powershell
 # 1. Levantar todo
@@ -26,46 +24,40 @@ docker-compose up -d
 # 5. Aumentar zoom: Ctrl + + (3-4 veces)
 ```
 
-**Checklist antes de empezar**:
-- [ ] 8 contenedores "Up" → `docker-compose ps`
-- [ ] Kibana abierto y cargado
-- [ ] GLPI logueado
-- [ ] Terminal PS visible
+Checklist antes de empezar:
+- 8 contenedores "Up" → `docker-compose ps`
+- Kibana abierto y cargado
+- GLPI logueado
+- Terminal PowerShell visible
 
----
+## PASO 1: Introducción (30 segundos)
 
-## 🎬 PASO 1: INTRODUCCIÓN (30 seg)
+Decir algo como:
+"Voy a demostrar un CyberSOC operativo con detección, visualización y gestión de incidentes en tiempo real."
 
-**DECIR**:
-> "Voy a demostrar un CyberSOC operativo con detección, visualización y gestión de incidentes en tiempo real."
-
-**HACER**:
+Ejecutar:
 ```powershell
 docker-compose ps
 ```
 
-**COMENTAR**: "8 servicios corriendo: ELK Stack para detección, GLPI para tickets, syslog-ng para logs."
+Comentar: "8 servicios corriendo: ELK Stack para detección, GLPI para tickets, syslog-ng para logs."
 
----
+## PASO 2: Generar ataque crítico (1 minuto)
 
-## 🎬 PASO 2: GENERAR ATAQUE CRÍTICO (1 min)
+Decir:
+"Voy a simular un ataque crítico: un comando destructivo rm -rf ejecutado por root."
 
-**DECIR**:
-> "Voy a simular un ataque crítico: un comando destructivo rm -rf ejecutado por root."
-
-**EJECUTAR EN TERMINAL**:
+Ejecutar en terminal:
 ```powershell
 docker exec syslog-client logger -t sudo "ROOT command: rm -rf /var/log/security"
 ```
 
-**DECIR MIENTRAS ESPERAS**:
-> "El log se envía al servidor syslog, Logstash aplica reglas de detección automáticas y lo clasifica como CRÍTICO."
+Mientras esperas (20 segundos), explicar:
+"El log se envía al servidor syslog, Logstash aplica reglas de detección automáticas y lo clasifica como CRÍTICO."
 
-**ESPERAR**: 20 segundos (cuenta mentalmente: "1-Mississippi, 2-Mississippi...")
+Espera 20 segundos (cuenta mentalmente)
 
----
-
-## 🎬 PASO 3: MOSTRAR DETECCIÓN EN KIBANA (2 min)
+## PASO 3: Mostrar detección en Kibana (2 minutos)
 
 **IR A**: Kibana Discover (pestaña 2)
 
@@ -86,38 +78,30 @@ docker exec syslog-client logger -t sudo "ROOT command: rm -rf /var/log/security
 
 ---
 
-## 🎬 PASO 4: DASHBOARD (1 min)
+## PASO 4: Dashboard (1 minuto)
 
-**IR A**: Kibana Dashboard (pestaña 1)
+Ir a Kibana Dashboard (pestaña 1) y darle a Refresh
 
-**HACER**: Click en **Refresh**
+Señalar:
+- Pie Chart (izquierda): "Distribución por severidad, ahora hay eventos críticos"
+- Timeline (centro): "Se ve el pico reciente"
+- Bar Chart (derecha): "Los comandos destructivos aparecen en el top"
 
-**SEÑALAR**:
-- **Pie Chart (izquierda)**: "Distribución por severidad, ahora tenemos eventos críticos"
-- **Timeline (centro)**: "Pico reciente en la última hora"
-- **Bar Chart (derecha)**: "Comandos destructivos en el top de eventos"
+Comentar: "El dashboard se actualiza en tiempo real, se puede configurar auto-refresh cada 30 segundos."
 
-**DECIR**:
-> "El dashboard se actualiza en tiempo real. Podemos configurar auto-refresh cada 30 segundos para monitoreo continuo."
+## PASO 5: Crear ticket en GLPI (4 minutos)
 
----
+Ir a GLPI (pestaña 3)
 
-## 🎬 PASO 5: CREAR TICKET EN GLPI (4 min)
+1. Asistencia → Tickets → + Crear ticket
+2. En VS Code: Copiar desde PLANTILLAS-TICKETS-GLPI.md el ticket #4 (líneas 119-155)
 
-**IR A**: GLPI (pestaña 3)
-
-**HACER**:
-1. **Asistencia → Tickets → + Crear ticket**
-2. En VS Code: Copiar desde **PLANTILLAS-TICKETS-GLPI.md** líneas 119-155 (ticket #4)
-
-**RELLENAR EN GLPI**:
-
-**Título**:
+Título:
 ```
 CRÍTICO: Comando destructivo rm -rf ejecutado - 04/02/2026
 ```
 
-**Descripción** (copiar todo):
+Descripción (copiar todo):
 ```
 ⚠️ INCIDENTE CRÍTICO - COMANDO DESTRUCTIVO
 Timestamp: 04/02/2026 [HORA ACTUAL]
@@ -142,19 +126,16 @@ SLA: 15 min respuesta / 4h resolución
 ESCALAR: CISO + Dirección TI (URGENTE)
 ```
 
-**CONFIGURAR**:
-- Tipo: **Incident**
-- Urgencia: **Very high**
-- Prioridad: **6 - Major**
+Configurar:
+- Tipo: Incident
+- Urgencia: Very high
+- Prioridad: 6 - Major
 
-**Click en "Añadir"**
+Click en "Añadir"
 
-**DECIR MIENTRAS COMPLETAS**:
-> "Estoy siguiendo el playbook documentado. Para eventos críticos, el SLA es 15 minutos de respuesta y 4 horas de resolución. Debe escalarse inmediatamente al CISO."
+Mientras completas el ticket, comentar: "Esto sigue el playbook documentado. Para eventos críticos el SLA es 15 minutos de respuesta y 4 horas de resolución, y hay que escalarlo al CISO."
 
----
-
-## 🎬 PASO 6: MOSTRAR PLAYBOOK (2 min)
+## PASO 6: Mostrar Playbook (2 minutos)
 
 **IR A**: VS Code → Abrir **PLAYBOOK.md**
 
@@ -166,52 +147,43 @@ ESCALAR: CISO + Dirección TI (URGENTE)
 - Tabla de SLA por severidad
 
 **DECIR**:
-> "Tenemos un playbook completo con procedimientos de respuesta para 8 tipos de ataques. Cada uno incluye pasos técnicos de contención, comandos específicos, SLAs definidos y taxonomía VERIS para cumplimiento normativo."
+Comentar: "Tenemos un playbook completo con procedimientos de respuesta para 8 tipos de ataques. Cada uno incluye pasos técnicos de contención, comandos específicos, SLAs y taxonomía VERIS."
 
-**BONUS** (si hay tiempo): Mostrar `logstash.conf` línea 60 con el patrón `/rm -rf|mkfs|dd if=/`
+Si hay tiempo, mostrar también logstash.conf línea 60 con el patrón que detecta rm -rf, mkfs, dd if=/
 
-**DECIR**:
-> "Esta es la regla que detectó el ataque."
+Decir: "Esta es la regla que detectó el ataque."
 
----
+## PASO 7: Cierre (1 minuto)
 
-## 🎬 PASO 7: CIERRE (1 min)
+Resumen: "He demostrado el ciclo completo - ataque simulado, detección automática en tiempo real, clasificación por severidad, visualización en dashboard y creación de ticket siguiendo los procedimientos."
 
-**DECIR**:
-> "He demostrado el ciclo completo: Ataque simulado → Detección automática en tiempo real → Clasificación por severidad → Visualización en dashboard → Creación de ticket siguiendo procedimientos documentados."
+Mencionar:
+- Política de retención: 90 días para críticos, 60 para high, 30 para medium
+- Cumplimiento GDPR y NIS2
+- Sistema escalable: ~1000 eventos/seg en Logstash
 
-**MENCIONAR**:
-- "Política de retención: 90 días para críticos, 60 para high, 30 para medium"
-- "Cumplimiento GDPR y Directiva NIS2"
-- "Sistema escalable: ~1000 eventos/seg en Logstash, ~5000 en Elasticsearch"
+"El sistema está completamente operativo y cumple todos los requisitos."
 
-**DECIR**:
-> "El sistema está completamente operativo y cumple todos los requisitos del proyecto."
+## Preguntas frecuentes (respuestas cortas)
 
----
+¿Por qué GLPI y no TheHive?
+"TheHive necesitaba más de 16GB RAM. GLPI es más ligero, igual de funcional y muy usado en producción."
 
-## 💬 PREGUNTAS FRECUENTES (Respuestas de 10 seg)
+¿Cómo evitáis falsos positivos?
+"Reglas muy específicas - por ejemplo rm -rf completo no solo rm, verificamos contexto del log y ajustamos continuamente. Tasa menor al 10%."
 
-**P: ¿Por qué GLPI y no TheHive?**  
-R: "TheHive necesitaba más de 16GB RAM. GLPI es más ligero, igual de funcional y ampliamente usado en producción."
+¿Qué pasa si cae Elasticsearch?
+"Logstash tiene buffer de 1GB, syslog-server guarda en disco, Filebeat reintenta. No se pierden eventos."
 
-**P: ¿Cómo evitáis falsos positivos?**  
-R: "Reglas muy específicas, por ejemplo rm -rf no solo rm, verificamos contexto del log y tuning continuo. Tasa de falsos positivos menor al 10%."
+¿Los tickets se crean automáticamente?
+"En esta versión son manuales para demostrar el flujo. En producción se automatizaría con webhooks de Logstash a la API de GLPI."
 
-**P: ¿Qué pasa si cae Elasticsearch?**  
-R: "Logstash tiene buffer de 1GB, syslog-server guarda en disco, Filebeat hace reintentos. No se pierden eventos."
+¿Cuántos eventos procesa?
+"Logstash ~1000 eventos/segundo, Elasticsearch ~5000. Suficiente para SOC de 50-100 empleados. Se puede escalar añadiendo nodos."
 
-**P: ¿Los tickets se crean automáticamente?**  
-R: "En esta versión son manuales para demostrar el flujo. En producción se automatizaría con webhooks de Logstash a la API de GLPI."
+## Plan B (si algo falla)
 
-**P: ¿Cuántos eventos procesa?**  
-R: "Logstash ~1000 eventos/segundo, Elasticsearch ~5000. Suficiente para SOC de 50-100 empleados. Escalable horizontalmente añadiendo nodos."
-
----
-
-## 🔥 SI ALGO FALLA (Plan B)
-
-**Eventos no aparecen en Kibana**:
+Si los eventos no aparecen en Kibana:
 ```powershell
 # 1. Ajustar tiempo en Kibana a "Last 1 hour"
 # 2. Regenerar evento
@@ -219,53 +191,49 @@ docker exec syslog-client logger -t sudo "DEMO: rm -rf /critical"
 # 3. Esperar 30 segundos
 ```
 
-**GLPI no responde**:
+Si GLPI no responde:
 ```powershell
 docker-compose restart glpi-incidentes
 # Esperar 30 segundos
 ```
 
-**Mostrar capturas de pantalla** preparadas en `docs/screenshots/` si falla técnicamente.
+Si algo falla técnicamente, mostrar capturas preparadas en docs/screenshots/
 
-**FRASE SALVADORA**: "Por tiempo, usaremos evidencias preparadas del funcionamiento completo del sistema."
+Frase salvadora: "Por tiempo, usaremos evidencias preparadas del funcionamiento completo."
 
----
+## Criterios de evaluación - cómo cubrirlos
 
-## 🎯 CRITERIOS DE EVALUACIÓN - CÓMO CUBRIRLOS
+Infraestructura (25%)
+Cubres con: docker-compose ps mostrando 8 servicios
+Decir: "Infraestructura containerizada con Docker, fácilmente replicable"
 
-### Infraestructura (25%)
-**Cubres con**: `docker-compose ps` → 8 servicios operativos
-**Decir**: "Infraestructura containerizada con Docker, fácilmente replicable"
+Detección (10%)
+Cubres con: Evento en Kibana clasificado automáticamente
+Decir: "8 reglas de detección en Logstash cubriendo OWASP Top 10"
 
-### Detección (10%)
-**Cubres con**: Evento en Kibana clasificado automáticamente
-**Decir**: "8 reglas de detección en Logstash cubriendo OWASP Top 10"
+Gestión Incidentes (10%)
+Cubres con: Ticket en GLPI con taxonomía VERIS
+Decir: "Taxonomía VERIS/ENISA, SLAs definidos, escalado documentado"
 
-### Gestión Incidentes (10%)
-**Cubres con**: Ticket en GLPI con taxonomía VERIS
-**Decir**: "Taxonomía VERIS/ENISA, SLAs definidos, escalado documentado"
+Documentación (25%)
+Cubres con: Mencionar README, PLAYBOOK, política retención
+Decir: "700 líneas de documentación técnica, playbook con 8 procedimientos, cumplimiento GDPR/NIS2"
 
-### Documentación (25%)
-**Cubres con**: Mencionar README.md, PLAYBOOK.md, política retención
-**Decir**: "699 líneas de documentación técnica, playbook con 8 procedimientos, cumplimiento GDPR/NIS2"
+Demo/Exposición (30%) - LO MÁS IMPORTANTE
+Cubres con: Esta demo completa
+Clave: Hablar con confianza, explicar cada paso, demostrar que entiendes el sistema
 
-### Demo/Exposición (30%) ⭐
-**Cubres con**: Esta demo completa
-**Clave**: Hablar con confianza, explicar cada paso, demostrar que entiendes el sistema
+## Checklist final
 
----
-
-## ✅ CHECKLIST FINAL ANTES DE EMPEZAR
-
-5 minutos antes:
-- [ ] Docker corriendo (8 contenedores "Up")
-- [ ] Kibana cargado (ambas pestañas)
-- [ ] GLPI logueado
-- [ ] VS Code con 3 archivos abiertos
-- [ ] Terminal PowerShell visible
-- [ ] Zoom aumentado (Ctrl + +)
-- [ ] Agua/café a mano
-- [ ] Respirar profundo 3 veces 😊
+5 minutos antes de empezar:
+- Docker corriendo (8 contenedores "Up")
+- Kibana cargado (ambas pestañas)
+- GLPI logueado
+- VS Code con archivos abiertos
+- Terminal PowerShell visible
+- Zoom aumentado (Ctrl + +)
+- Agua/café a mano
+- Respirar profundo 3 veces
 
 ---
 
@@ -285,32 +253,20 @@ docker-compose restart glpi-incidentes
 - Decir "no sé" sin ofrecer alternativa
 - Usar muletillas ("ehhh", "bueno", "pues")
 
-**🎤 FRASES PODEROSAS**:
+Frases que funcionan bien:
 - "Como pueden observar..."
 - "El sistema detectó automáticamente..."
 - "Siguiendo el playbook documentado..."
 - "Esto cumple la normativa GDPR/NIS2..."
 - "En un entorno de producción real, también implementaríamos..."
 
----
+## Último consejo
 
-## 🚀 ÚLTIMO CONSEJO
+Practica mínimo 3 veces esta guía completa:
+1. Primera vez: lee y ejecuta (20 min)
+2. Segunda vez: cronometra (objetivo 15 min)
+3. Tercera vez: sin mirar la guía (solo consultas)
 
-**Practica MÍNIMO 3 veces** esta guía completa:
-1. Primera vez: Lee y ejecuta (20 min)
-2. Segunda vez: Cronometra (objetivo 15 min)
-3. Tercera vez: Sin mirar la guía (solo consulta)
+El día de la presentación deberías poder hacerlo casi de memoria, consultando solo cuando necesites copiar texto.
 
-**Objetivo**: Que el día de la presentación puedas hacerlo casi de memoria, consultando solo cuando necesites copiar texto.
-
----
-
-**¡A POR EL 10!** 🎉
-
-**Recuerda**: El objetivo NO es ser perfecto, sino demostrar que:
-1. ✅ Entiendes lo que construiste
-2. ✅ El sistema funciona de punta a punta
-3. ✅ Está documentado profesionalmente
-4. ✅ Cumple todos los requisitos
-
-**Tu proyecto está COMPLETO. Solo falta que lo presentes con confianza.** 💪
+Recuerda: el objetivo no es ser perfecto, sino demostrar que entiendes lo que construiste, que el sistema funciona, está bien documentado y cumple todos los requisitos. Tu proyecto está completo, solo falta presentarlo con confianza.
