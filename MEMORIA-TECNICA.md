@@ -93,7 +93,7 @@ Métricas de Rendimiento (KPI):
 - Tasa de falsos positivos: < 10%
 - Cobertura de detección: > 95% de ataques conocidos
 
-`n`n## Inicio Rápido (5 minutos)
+## Inicio Rápido (5 minutos)
 
 ### 1. Iniciar el Sistema
 ```powershell
@@ -105,13 +105,13 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
 ### 2. Acceder a las Interfaces
 
 **Kibana (SIEM Dashboard)** - INTERFAZ PRINCIPAL
-- 🌐 URL: **http://localhost:5601**
-- 🔓 Sin credenciales
+-  URL: **http://localhost:5601**
+-  Sin credenciales
 - Menú → Analytics → Discover
 
 **GLPI (Gestión de Tickets)**
-- 🎫 URL: **http://localhost:9000**
-- 🔑 Usuario: `glpi` / Contraseña: `glpi`
+-  URL: **http://localhost:9000**
+-  Usuario: `glpi` / Contraseña: `glpi`
 - Ver [guía completa de instalación](glpi/GUIA-GLPI.md)
 
 **IMPORTANTE**: NO acceder a `http://localhost:9200` (Elasticsearch no tiene interfaz web)
@@ -159,7 +159,7 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
    - **Prioridad**: Según severidad (6-Major para critical)
    - **Categoría**: Incident
 
-`n`n## Arquitectura del Stack
+## Arquitectura del Stack
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -204,7 +204,7 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-`n`n## Componentes del Stack
+## Componentes del Stack
 
 ### 1. **Recolección de Logs (Agents)**
 - **syslog-ng**: Cliente y servidor para agregación de logs (Puerto 514/TCP)
@@ -226,7 +226,7 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
 ### 4. **Generación de Tráfico**
 - **simulate_attacks.ps1**: Script con 11 tipos de ataques simulados
 
-`n`n## ¿Qué es cada componente?
+## ¿Qué es cada componente?
 
 ### Kibana vs Elasticsearch - ¿Cuál uso?
 
@@ -236,7 +236,7 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
 - Es como el "Windows Explorer" del sistema
 - **Accede SIEMPRE a Kibana para ver tus datos**
 
-**🔧 Elasticsearch (http://localhost:9200)** - NO accedas directamente
+**� Elasticsearch (http://localhost:9200)** - NO accedas directamente
 - Es el "motor" backend que almacena datos
 - Solo muestra JSON crudo sin interfaz bonita
 - Kibana usa Elasticsearch internamente
@@ -247,7 +247,7 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
 - NO tiene interfaz web
 - Aplica 8 reglas de seguridad en tiempo real
 
-`n`n## � Inicio Rápido
+## � Inicio Rápido
 
 ### Opción 1: Usar el script automatizado (Recomendado)
 
@@ -268,7 +268,7 @@ Este script:
 docker-compose up -d
 ```
 
-`n`n## �📦 Requisitos Previos
+## � Requisitos Previos
 
 - **Docker**: versión 20.10 o superior
 - **Docker Compose**: versión 2.0 o superior
@@ -276,7 +276,7 @@ docker-compose up -d
 - **Disco**: Mínimo 20GB libres
 - **Sistema Operativo**: Windows 10/11, Linux, macOS
 
-`n`n## Instalación y Despliegue
+## Instalación y Despliegue
 
 ### 1. Clonar o descargar el repositorio
 
@@ -334,7 +334,7 @@ docker-compose logs -f wazuh-manager
 docker-compose logs -f thehive
 ```
 
-`n`n## 🌐 Acceso a las Interfaces Web
+##  Acceso a las Interfaces Web
 
 Una vez levantado el entorno, accede a:
 
@@ -365,21 +365,21 @@ Usa el script de simulación para generar eventos de prueba:
 ```
 
 El script muestra un menú interactivo con 11 tipos de ataques:
-1. 🔓 SSH Brute Force
-2. 💉 SQL Injection  
-3. 🎭 Cross-Site Scripting (XSS)
-4. 📂 Path Traversal
-5. 💣 Comandos Destructivos
+1.  SSH Brute Force
+2. � SQL Injection  
+3.  Cross-Site Scripting (XSS)
+4.  Path Traversal
+5.  Comandos Destructivos
 6. Escalada de Privilegios
 7. Port Scanning
-8. 👻 Procesos Sospechosos
-9. 📤 Exfiltración de Datos
-10. 📦 Instalación No Autorizada
-11. 🎲 Todos los ataques
+8.  Procesos Sospechosos
+9.  Exfiltración de Datos
+10.  Instalación No Autorizada
+11.  Todos los ataques
 
 Los eventos aparecen en **Kibana** en 5-10 segundos.
 
-`n`n## Flujo de Trabajo Completo
+## Flujo de Trabajo Completo
 
 ### Flujo: Ataque → Detección → Visualización → Gestión
 
@@ -427,7 +427,7 @@ Los eventos aparecen en **Kibana** en 5-10 segundos.
 - **Prioridad**: 5 - High
 - **Categoría**: Incident
 
-`n`n## 📈 Dashboard de Kibana
+##  Dashboard de Kibana
 
 El dashboard "CyberSOC - Security Dashboard" incluye:
 
@@ -449,7 +449,7 @@ El dashboard "CyberSOC - Security Dashboard" incluye:
 - Recomendado: 30 seconds o 1 minute
 - Los eventos aparecen automáticamente
 
-`n`n## 🔧 Comandos Útiles
+## � Comandos Útiles
 
 ### Gestión de Contenedores
 
@@ -509,7 +509,7 @@ docker exec syslog-client logger -t sudo "ROOT command: rm -rf /var/log/*"
 docker exec syslog-client logger -t kernel "Suspicious process: /tmp/.hidden/cryptominer"
 ```
 
-`n`n## 🧪 Escenarios de Prueba
+##  Escenarios de Prueba
 
 ### Escenario 1: SSH Brute Force Attack
 ```powershell
@@ -547,7 +547,7 @@ docker exec syslog-client logger -t kernel "Suspicious process: /tmp/.hidden/cry
 - Severidades: critical, high, medium
 - Perfecto para demostración completa
 
-`n`n## 🎓 Guías y Documentación
+##  Guías y Documentación
 
 ### Documentación Incluida
 
@@ -593,7 +593,7 @@ docker exec syslog-client logger -t su "User changed to root"
 
 **Resultado esperado**: Evento etiquetado con `privilege_escalation` y severidad `high` en Kibana.
 
-`n`n## 📈 Demostración del Ciclo Completo
+##  Demostración del Ciclo Completo
 
 ### Escenario: Detección y Gestión de Ataque de Fuerza Bruta
 
@@ -635,7 +635,7 @@ docker exec syslog-client logger -t su "User changed to root"
      - [ ] Notificar al equipo de red
    - **Para la demo**: Exporta eventos a CSV desde Kibana (botón "Share" → "CSV Reports")
 
-`n`n## Comandos Útiles
+## Comandos Útiles
 
 ### Gestión de Contenedores
 
@@ -674,7 +674,7 @@ docker system df
 
 ### Backup de Datos
 
-`n`n## 🔧 Solución de Problemas
+## � Solución de Problemas
 
 ### Problema: Kibana muestra "No results"
 
@@ -721,7 +721,7 @@ docker-compose up -d
 3. Completar instalación web en primer acceso
 4. Seguir guía: [glpi/GUIA-GLPI.md](glpi/GUIA-GLPI.md)
 
-`n`n## Requisitos del Proyecto Cumplidos
+## Requisitos del Proyecto Cumplidos
 
 ### Requisito 1: SIEM y Dashboards (ELK Stack)
 - Elasticsearch 8.11.0 para almacenamiento
@@ -762,9 +762,9 @@ docker-compose up -d
 - Auto-refresh configurable
 - Filtros por severidad y tipo
 
-`n`n## 🎓 Documentación Completa
+##  Documentación Completa
 
-### 📚 Archivos de Documentación
+### � Archivos de Documentación
 
 | Archivo | Propósito | Estado |
 |---------|-----------|--------|
@@ -775,7 +775,7 @@ docker-compose up -d
 | **logstash/pipeline/logstash.conf** | Reglas comentadas | COMPLETO |
 | **docker-compose.yml** | Arquitectura desplegable | COMPLETO |
 
-### 📖 Playbook de Respuesta a Incidentes
+### � Playbook de Respuesta a Incidentes
 
 **[PLAYBOOK.md](PLAYBOOK.md)** incluye:
 - 8 procedimientos de respuesta detallados
@@ -785,7 +785,7 @@ docker-compose up -d
 - Comandos técnicos de PowerShell/Bash
 - Flujos de trabajo ilustrados
 
-### 📸 Evidencias Visuales
+###  Evidencias Visuales
 
 **[docs/screenshots/README.md](docs/screenshots/README.md)** incluye:
 - Guía para 13 capturas de pantalla
@@ -793,7 +793,7 @@ docker-compose up -d
 - Comandos específicos para cada captura
 - Formato profesional para memoria
 
-### 🔐 Política de Retención de Logs
+###  Política de Retención de Logs
 - **CRITICAL**: 90 días (Elasticsearch Hot)
 - **HIGH**: 60 días (Elasticsearch Warm)
 - **MEDIUM**: 30 días (Elasticsearch Warm)
@@ -807,7 +807,7 @@ Cumplimiento: GDPR, Directiva NIS2, ISO 27001
 - **Misuse**: Privilege Abuse, Destructive Commands
 - **DoS**: Port Scanning
 
-`n`n## 👥 Créditos
+##  Créditos
 
 Proyecto desarrollado para demostración de CyberSOC básico utilizando tecnologías open source.
 
@@ -818,11 +818,11 @@ Proyecto desarrollado para demostración de CyberSOC básico utilizando tecnolog
 - Filebeat 8.11.0
 - Docker & Docker Compose
 
-`n`n## 📄 Licencia
+##  Licencia
 
 Este proyecto es de código abierto con fines educativos.
 
-`n`n## 📞 Soporte
+##  Soporte
 
 Para consultas sobre el proyecto:
 - Revisar [glpi/GUIA-GLPI.md](glpi/GUIA-GLPI.md) para configuración de GLPI
@@ -831,17 +831,17 @@ Para consultas sobre el proyecto:
 
 ---
 
-**¡Proyecto CyberSOC 100% Completo y Operativo!** 🎉
+**¡Proyecto CyberSOC 100% Completo y Operativo!**
 
-`n`n## 👥 Equipo y Contribuciones
+##  Equipo y Contribuciones
 
 Este proyecto ha sido desarrollado como parte de la **UD 4 - Construcción de un CyberSOC**.
 
-`n`n## Licencia
+## Licencia
 
 Este proyecto es de código abierto bajo licencia MIT.
 
-`n`n## 🎓 Notas para la Demo
+##  Notas para la Demo
 
 ### Puntos Clave a Demostrar:
 
@@ -862,7 +862,7 @@ Este proyecto es de código abierto bajo licencia MIT.
    - Exportar eventos a CSV
    - Explicar: "Sistema completo de detección y clasificación"
 
-`n`n## Próximos Pasos (Mejoras Futuras)
+## Próximos Pasos (Mejoras Futuras)
 
 - [ ] Integración con plataforma SOAR para respuesta automatizada
 - [ ] Conexión con MISP para threat intelligence
@@ -873,4 +873,4 @@ Este proyecto es de código abierto bajo licencia MIT.
 
 ---
 
-**¡Buena suerte con la demo! 🎉**
+**¡Buena suerte con la demo! **
