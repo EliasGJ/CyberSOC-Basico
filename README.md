@@ -4,11 +4,11 @@ Sistema de Centro de Operaciones de Seguridad (SOC) basado en contenedores Docke
 
 ## Características principales
 
-- **Detección automática**: ELK Stack con 8 reglas de seguridad configuradas
-- **Visualización**: Dashboard Kibana con 3 gráficos en tiempo real
+- **Detección automática**: ELK Stack con 10 reglas de seguridad configuradas
+- **Visualización**: Dashboard Kibana con eventos en tiempo real
 - **Gestión de incidentes**: Sistema de ticketing GLPI integrado
 - **Recolección de logs**: syslog-ng + Filebeat para captura distribuida
-- **Simulación de ataques**: Scripts para generar 11 escenarios de ataque
+- **Simulación de ataques**: Scripts para generar 10 tipos de ataques diferentes
 
 ## Requisitos
 
@@ -72,7 +72,7 @@ CyberSOC.Basico/
 ├── docker-compose.yml          # Orquestación de 8 servicios
 ├── logstash/
 │   └── pipeline/
-│       └── logstash.conf       # 8 reglas de detección
+│       └── logstash.conf       # 10 reglas de detección configuradas
 ├── filebeat/
 │   └── filebeat.yml            # Configuración recolector
 ├── client/
@@ -105,23 +105,26 @@ CyberSOC.Basico/
 
 ## Reglas de detección
 
-El sistema detecta automáticamente:
+El sistema detecta automáticamente 10 tipos de ataques:
 
-1. SSH Brute Force (MEDIUM)
-2. SQL Injection (HIGH)
-3. XSS Attack (HIGH)
-4. Comandos Destructivos (CRITICAL)
-5. Escalada de Privilegios (CRITICAL)
-6. Port Scanning (MEDIUM)
-7. Procesos Sospechosos (HIGH)
-8. Exfiltración de Datos (HIGH)
+1. **SSH Brute Force** (MEDIUM) - Múltiples intentos de login fallidos
+2. **SQL Injection** (HIGH) - Intentos de inyección SQL (SELECT, UNION, OR '1'='1')
+3. **XSS Attack** (HIGH) - Cross-Site Scripting (<script>, javascript:)
+4. **Path Traversal** (HIGH) - Acceso a archivos no autorizados (../, /etc/passwd)
+5. **Comandos Destructivos** (CRITICAL) - Comandos peligrosos (rm -rf, mkfs, dd)
+6. **Escalada de Privilegios** (CRITICAL) - Cambios a root no autorizados
+7. **Port Scanning** (MEDIUM) - Escaneos de puertos (Nmap scan)
+8. **Procesos Sospechosos** (HIGH) - Procesos maliciosos (ncat, cryptominer)
+9. **Exfiltración de Datos** (HIGH) - Transferencias sospechosas (curl, scp, sftp)
+10. **Instalación No Autorizada** (MEDIUM) - Instalación de software (apt, dpkg)
 
 ## Documentación
 
 - `MEMORIA-TECNICA.md`: Documentación técnica completa (política de retención, SLA, taxonomía VERIS)
-- `PLAYBOOK.md`: Procedimientos de respuesta para cada tipo de ataque
-- `PLANTILLAS-TICKETS-GLPI.md`: 11 plantillas listas para copiar
+- `PLAYBOOK.md`: Procedimientos de respuesta para cada tipo de ataque (10 playbooks)
+- `PLANTILLAS-TICKETS-GLPI.md`: 10 plantillas listas para copiar
 - `GUIA-PRESENTACION-10.md`: Guía paso a paso para demostración en vivo
+- `GUION-PRESENTACION-ELIAS.md`: Guión humanizado para presentación grupal
 
 ## Comandos útiles
 

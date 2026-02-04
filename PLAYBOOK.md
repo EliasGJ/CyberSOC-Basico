@@ -9,11 +9,13 @@ Fecha: 04/02/2026
 1. [Respuesta ante SSH Brute Force](#1-ssh-brute-force)
 2. [Respuesta ante SQL Injection](#2-sql-injection)
 3. [Respuesta ante XSS Attack](#3-xss-attack)
-4. [Respuesta ante Comandos Destructivos](#4-comandos-destructivos)
-5. [Respuesta ante Escalada de Privilegios](#5-escalada-de-privilegios)
-6. [Respuesta ante Port Scanning](#6-port-scanning)
-7. [Respuesta ante Proceso Sospechoso](#7-proceso-sospechoso)
-8. [Respuesta ante Exfiltración de Datos](#8-exfiltración-de-datos)
+4. [Respuesta ante Path Traversal](#4-path-traversal)
+5. [Respuesta ante Comandos Destructivos](#5-comandos-destructivos)
+6. [Respuesta ante Escalada de Privilegios](#6-escalada-de-privilegios)
+7. [Respuesta ante Port Scanning](#7-port-scanning)
+8. [Respuesta ante Proceso Sospechoso](#8-proceso-sospechoso)
+9. [Respuesta ante Exfiltración de Datos](#9-exfiltración-de-datos)
+10. [Respuesta ante Instalación No Autorizada](#10-instalación-no-autorizada)
 
 
 
@@ -214,9 +216,80 @@ New-NetFirewallRule -DisplayName "Block XSS Attacker" -RemoteAddress [IP] -Actio
 
 **SLA**: Respuesta 1h / Resolución 24h
 
+---
 
+## 4. Path Traversal
 
-## 4. Comandos Destructivos
+**Severidad**: HIGH  
+**Tag**: `path_traversal`  
+**Tipo**: Ataque Web
+
+### Procedimiento de Respuesta
+
+#### Paso 1: Detección (0-5 minutos)
+- Alerta HIGH en Kibana
+- Buscar: `tags:"path_traversal"`
+- Identificar aplicación web afectada
+
+#### Paso 2: Análisis (5-15 minutos)
+1. **Identificar recurso objetivo**:
+   - Revisar mensaje: `../, /etc/passwd, /etc/shadow`
+   - Determinar si accedió a archivos sensibles
+   
+2. **Verificar logs del servidor web**:
+   ```powershell
+   # Buscar intentos exitosos (código 200)
+   tags:"path_traversal" AND message:"200"
+   ```
+
+3. **Evaluar impacto**:
+   - Si accedió a /etc/passwd → CRITICAL
+   - Si accedió a /etc/shadow → CRITICAL
+   - Solo intentos fallidos → Mantener HIGH
+
+#### Paso 3: Contención (15-30 minutos)
+**Acciones inmediatas**:
+```powershell
+# Bloquear IP origen
+netsh advfirewall firewall add rule name="Block Path Traversal Attacker" dir=in action=block remoteip=[IP_ATACANTE]
+
+# Revisar permisos de archivos sensibles
+icacls C:\datos\sensibles
+```
+
+#### Paso 4: Documentación (30-45 minutos)
+**Crear ticket en GLPI**:
+- **Título**: `HIGH: Path Traversal en [APP] - [FECHA]`
+- **Descripción**:
+```
+DETECCIÓN PATH TRAVERSAL
+
+Timestamp: [FECHA_HORA]
+Aplicación: [NOMBRE_APP]
+IP Origen: [IP_ATACANTE]
+Archivo objetivo: [ARCHIVO]
+Acceso logrado: [SÍ/NO]
+Código respuesta: [200/403/404]
+
+ACCIONES TOMADAS:
+1. IP bloqueada
+2. Verificación de integridad de archivos
+3. Revisión de permisos
+
+ESTADO: En análisis
+PRIORIDAD: Alta
+```
+
+#### Paso 5: Seguimiento (48 horas)
+- Auditar logs de acceso a archivos sensibles
+- Validar WAF configurado correctamente
+- Implementar validación de rutas en aplicación
+
+**SLA**: Respuesta 1h / Resolución 24h
+
+---
+
+## 5. Comandos Destructivos
 
 **Severidad**: CRITICAL  
 **Tag**: `destructive_command`  
@@ -370,9 +443,9 @@ docker network disconnect socnet [container]
 
 **SLA**: Respuesta 15 min / Resolución 4h
 
+---
 
-
-## 6. Port Scanning
+## 7. Port Scanning
 
 **Severidad**: MEDIUM  
 **Tag**: `port_scan`  
@@ -405,9 +478,9 @@ netsh advfirewall firewall add rule name="Block Scanner" dir=in action=block rem
 
 **SLA**: Respuesta 4h / Resolución 3 días
 
+---
 
-
-## 7. Proceso Sospechoso
+## 8. Proceso Sospechoso
 
 **Severidad**: HIGH  
 **Tag**: `suspicious_process`  
@@ -450,9 +523,9 @@ iptables -A OUTPUT -d [IP_C2] -j DROP
 
 **SLA**: Respuesta 1h / Resolución 24h
 
+---
 
-
-## 8. Exfiltración de Datos
+## 9. Exfiltración de Datos
 
 **Severidad**: HIGH  
 **Tag**: `data_exfiltration`  
@@ -491,6 +564,84 @@ docker exec [container] pkill scp
 - **Requiere**: Notificación DPO (Data Protection Officer)
 
 **SLA**: Respuesta 1h / Resolución 24h
+
+---
+
+## 10. Instalación No Autorizada
+
+**Severidad**: MEDIUM  
+**Tag**: `unauthorized_installation`  
+**Tipo**: Violación de Política
+
+### Procedimiento de Respuesta
+
+#### Paso 1: Detección (0-5 minutos)
+- Alerta: `tags:"unauthorized_installation"`
+- Comandos: `apt install`, `yum install`, `dpkg -i`
+
+#### Paso 2: Análisis (5-30 minutos)
+1. **Identificar software instalado**:
+   - Revisar mensaje: paquetes instalados
+   - Clasificar software (herramientas de hacking, proxies, etc.)
+
+2. **Verificar usuario**:
+   - ¿Quién ejecutó la instalación?
+   - ¿Tiene autorización?
+   - Revisar políticas de instalación
+
+3. **Evaluar riesgo**:
+   - Software de pentesting (nmap, netcat, tor) → HIGH
+   - Software normal sin autorización → MEDIUM
+
+#### Paso 3: Contención (30 minutos - 1 hora)
+```bash
+# Listar paquetes instalados recientemente
+docker exec [container] apt list --installed
+
+# Desinstalar software no autorizado
+docker exec [container] apt remove [paquete] -y
+
+# O recrear contenedor limpio
+docker-compose up -d --force-recreate [servicio]
+```
+
+#### Paso 4: Documentación (1-2 horas)
+**Crear ticket en GLPI**:
+- **Título**: `MEDIUM: Instalación no autorizada de [SOFTWARE] - [FECHA]`
+- **Descripción**:
+```
+INSTALACIÓN NO AUTORIZADA DETECTADA
+
+Timestamp: [FECHA_HORA]
+Host: [HOSTNAME]
+Usuario: [USER]
+Software: [LISTA_PAQUETES]
+Violación de política: [SÍ/NO]
+
+EVALUACIÓN DE RIESGO:
+- Herramientas de hacking: [SÍ/NO]
+- Software malicioso: [SÍ/NO]
+- Uso legítimo posible: [SÍ/NO]
+
+ACCIONES TOMADAS:
+1. Software desinstalado
+2. Usuario notificado/amonestado
+3. Logs preservados
+4. Política reforzada
+
+ESTADO: Resuelto
+PRIORIDAD: Media
+```
+
+#### Paso 5: Seguimiento (1 semana)
+- Revisar si usuario vuelve a instalar
+- Validar necesidad legítima del software
+- Actualizar políticas si es necesario
+- Implementar controles preventivos (AppLocker, restricciones sudo)
+
+**SLA**: Respuesta 4h / Resolución 3 días
+
+---
 
 ## Tabla de SLA por Severidad
 
