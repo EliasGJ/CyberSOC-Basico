@@ -5,11 +5,10 @@ logs/
 *.log
 
 # Docker volumes data
-wazuh-data/
-wazuh-logs/
-cassandra-data/
-elasticsearch-thehive-data/
-thehive-data/
+elasticsearch-siem-data/
+filebeat-data/
+mysql-data/
+glpi-data/
 
 # Archivos temporales
 *.tmp

@@ -303,7 +303,7 @@ Este comando descargará todas las imágenes necesarias y levantará los contene
 
 **Tiempo de inicio**: 
 - **ELK Stack**: ~1-2 minutos
-- **Cassandra + TheHive**: ~2-3 minutos adicionales
+- **GLPI + MySQL**: ~30-60 segundos adicionales
 
 ### 4. Verificar el estado de los contenedores
 
@@ -319,8 +319,8 @@ elasticsearch-siem    Up
 logstash-siem         Up
 kibana-siem           Up
 filebeat-collector    Up
-cassandra-db          Up
-thehive-incidentes    Up
+mysql-db              Up
+glpi-ticketing        Up
 ```
 
 ### 5. Ver logs de los servicios
@@ -330,8 +330,8 @@ thehive-incidentes    Up
 docker-compose logs -f
 
 # Ver logs de un servicio específico
-docker-compose logs -f wazuh-manager
-docker-compose logs -f thehive
+docker-compose logs -f logstash-siem
+docker-compose logs -f glpi-ticketing
 ```
 
 ##  Acceso a las Interfaces Web
