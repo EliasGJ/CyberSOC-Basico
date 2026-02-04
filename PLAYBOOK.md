@@ -1,4 +1,4 @@
-# Playbook de Operaciones - CyberSOC
+﻿# Playbook de Operaciones - CyberSOC
 
 Manual de Procedimientos para Analistas SOC
 Versión: 1.0
@@ -15,7 +15,7 @@ Fecha: 04/02/2026
 7. [Respuesta ante Proceso Sospechoso](#7-proceso-sospechoso)
 8. [Respuesta ante Exfiltración de Datos](#8-exfiltración-de-datos)
 
----
+
 
 ## 1. SSH Brute Force
 
@@ -84,7 +84,7 @@ PRIORIDAD: Alta
 
 **SLA**: Respuesta 1h / Resolución 24h
 
----
+
 
 ## 2. SQL Injection
 
@@ -174,7 +174,7 @@ TAXONOMÍA: Hacking - Web Application Attack
 
 **SLA**: Respuesta 1h / Resolución 24h
 
----
+
 
 ## 3. XSS Attack
 
@@ -214,7 +214,7 @@ New-NetFirewallRule -DisplayName "Block XSS Attacker" -RemoteAddress [IP] -Actio
 
 **SLA**: Respuesta 1h / Resolución 24h
 
----
+
 
 ## 4. Comandos Destructivos
 
@@ -332,7 +332,7 @@ REQUIERE: Escalado a CISO
 
 **SLA**: Respuesta INMEDIATA (15 min) / Resolución 4h
 
----
+
 
 ## 5. Escalada de Privilegios
 
@@ -370,7 +370,7 @@ docker network disconnect socnet [container]
 
 **SLA**: Respuesta 15 min / Resolución 4h
 
----
+
 
 ## 6. Port Scanning
 
@@ -405,7 +405,7 @@ netsh advfirewall firewall add rule name="Block Scanner" dir=in action=block rem
 
 **SLA**: Respuesta 4h / Resolución 3 días
 
----
+
 
 ## 7. Proceso Sospechoso
 
@@ -450,7 +450,7 @@ iptables -A OUTPUT -d [IP_C2] -j DROP
 
 **SLA**: Respuesta 1h / Resolución 24h
 
----
+
 
 ## 8. Exfiltración de Datos
 

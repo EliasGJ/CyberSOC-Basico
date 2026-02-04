@@ -1,4 +1,4 @@
-# Plantillas de Tickets GLPI - 11 Escenarios
+﻿# Plantillas de Tickets GLPI - 11 Escenarios
 
 Instrucciones: Copiar y pegar en GLPI → Asistencia → Crear ticket
 

@@ -1,4 +1,4 @@
-# CyberSOC Básico
+﻿# CyberSOC Básico
 
 Sistema de Centro de Operaciones de Seguridad (SOC) basado en contenedores Docker que implementa detección, análisis y gestión de incidentes de seguridad.
 

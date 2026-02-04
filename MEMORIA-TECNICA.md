@@ -118,7 +118,7 @@ Espera 30-60 segundos hasta que todos los contenedores estén healthy.
 
 ### 3. Configurar Kibana (Primera Vez)
 
-1. Ir a: **Menú ☰ → Stack Management → Data Views**
+1. Ir a: **Menú → Stack Management → Data Views**
 2. Clic en **"Create data view"**
 3. Configurar:
    - **Name**: `Syslog Security Events`
@@ -829,7 +829,7 @@ Para consultas sobre el proyecto:
 - Revisar logs: `docker-compose logs -f [servicio]`
 - Verificar arquitectura en sección "Arquitectura del Stack"
 
----
+
 
 **¡Proyecto CyberSOC 100% Completo y Operativo!**
 
@@ -871,6 +871,6 @@ Este proyecto es de código abierto bajo licencia MIT.
 - [ ] Dashboard personalizado con métricas KPI del SOC
 - [ ] Integración con sistemas ITSM (JIRA, ServiceNow)
 
----
+
 
 **¡Buena suerte con la demo! **

@@ -1,4 +1,4 @@
-# Guía de presentación - Demostración en vivo
+﻿# Guía de presentación - Demostración en vivo
 
 Duración: 12-15 minutos
 
@@ -76,7 +76,7 @@ Espera 20 segundos (cuenta mentalmente)
 **DECIR**:
 > "Logstash detectó automáticamente el patrón rm -rf y lo clasificó como crítico. El evento está indexado en Elasticsearch y listo para análisis."
 
----
+
 
 ## PASO 4: Dashboard (1 minuto)
 
@@ -103,7 +103,7 @@ CRÍTICO: Comando destructivo rm -rf ejecutado - 04/02/2026
 
 Descripción (copiar todo):
 ```
-⚠️ INCIDENTE CRÍTICO - COMANDO DESTRUCTIVO
+INCIDENTE CRÍTICO - COMANDO DESTRUCTIVO
 Timestamp: 04/02/2026 [HORA ACTUAL]
 Host afectado: syslog-client
 Usuario: root
@@ -235,18 +235,18 @@ Clave: Hablar con confianza, explicar cada paso, demostrar que entiendes el sist
 - Agua/café a mano
 - Respirar profundo 3 veces
 
----
 
-## 💡 TIPS PARA EL 10
 
-**✅ HACER**:
+## Tips para conseguir el 10
+
+Hacer:
 - Hablar pausado (la audiencia necesita procesar)
 - Explicar QUÉ haces ANTES de hacerlo
 - Mirar al público, no solo a la pantalla
 - Usar términos técnicos correctos (SIEM, SOC, IDS, taxonomía)
 - Conectar con requisitos: "Esto cumple el requisito de detección automática..."
 
-**❌ EVITAR**:
+Evitar:
 - Disculparte ("perdón esto está mal...")
 - Ir demasiado rápido
 - Leer textualmente de pantalla
